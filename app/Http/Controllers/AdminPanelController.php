@@ -27,10 +27,12 @@ class AdminPanelController extends Controller
 
     public function index(Request $request){
 
-        $bookData = $this->url_get_contents('http://choriyedao.com/api/books?key=yoyo');
+//        $bookData = $this->url_get_contents('http://choriyedao.com/api/books?key=yoyo');
+//
+//        return view('pages.two_site_data_combine', [
+//            'bookData'      => json_decode($bookData)
+//        ]);
 
-        return view('pages.two_site_data_combine', [
-            'bookData'      => json_decode($bookData)
-        ]);
+        return view('pages.admin.orders');
     }
 }

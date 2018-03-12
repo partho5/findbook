@@ -22,11 +22,12 @@ $agent = new Agent();
             </div>
 
             <h3 style="color: #fff; font-size: 30px; margin-top: 50px">The Fastest Book Gateway</h3>
-                <a href="/invoice">Invoice Test</a>
             <p>1 Click Download, Purchase at Cheap</p>
         </div>
 
         <div id="product-cat-1" class="col-md-12" style="padding: 0px"><br><br>
+            <a href="/product"> Products</a> <br>
+            <a href="/dash">Orders</a>
             <h2><span>Book Category Science</span></h2>
 
             @for($i=0; $i<9; $i++)
