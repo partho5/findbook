@@ -1,0 +1,38 @@
+.book-details{
+    font-size: 20px;
+}
+h2{
+    font-family: Raleway, sans-serif;
+    font-weight: bold;
+}
+.single-order{
+    background-color: #f9f9f9;
+    border: 1px solid #dddddd;
+    padding: 10px;
+    margin-top: 10px;
+}
+.product-image img{
+    border: 1px solid #9f9f9f;
+    box-shadow: 2px 2px 0px 1px rgba(189, 189, 189, 0.82);
+}
+#quantity-container, #charged-price-container{
+    background-color: #f9f9f9;
+    border: 1px solid #b1b1b1;
+    margin-bottom: 10px;
+}
+.offer-msg{
+    font-size: 20px;
+    background-color: #1f648b;
+    color: #fff;
+}
+#place-order-form h2{
+    background-color: #00a85f;
+    color: #f9f9f9;
+    font-size: 4vh;
+}
+#left-bar, #right-bar{
+    opacity: 0.1;
+}
+#left-bar:hover, #right-bar:hover{
+    opacity: 1;
+}

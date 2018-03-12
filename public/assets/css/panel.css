@@ -1,0 +1,68 @@
+
+
+
+.table-head{
+    color: rgba(187, 53, 0, 0.91);
+    background-color: rgba(139, 100, 0, 0.14);
+}
+.origin-choriyedao{
+    color: rgb(0, 164, 38);
+}
+.origin-findbook{
+    //background-color: rgba(244, 244, 244, 0.34);
+}
+.non-editable{
+    opacity: 0.3;
+}
+
+
+
+
+
+
+
+
+
+.btn-1{
+    background-color: rgba(0, 165, 189, 0.98);
+    padding: 5px 15px;
+    color: #ffffff;
+    cursor: pointer;
+    border: 1px solid #fff;
+}
+.btn-1:hover{
+    background-color: rgba(0, 165, 189, 0.82);
+    border: 1px solid #000000;
+}
+.btn-1:active{
+    box-shadow: 0 3px 0 #00823F;
+    top: 3px;
+}
+
+
+.btn-2{
+    background-color: rgba(227, 52, 0, 0.93);
+    padding: 5px 15px;
+    color: #ffffff;
+    cursor: pointer;
+    border: 1px solid #fff;
+}
+.btn-2:hover{
+    background-color: #ff0000;
+    border: 1px solid #000000;
+}
+.btn-2:active{
+    box-shadow: 0 3px 0 #ff000077;
+    top: 3px;
+}
+
+
+.table .id{
+    width: 50px;
+}
+.table .book-name, .table .author-name{
+    width: 300px;
+}
+.table .price{
+    width: 80px;
+}
