@@ -1,0 +1,26 @@
+
+@media only screen and (max-width: 600px) {
+    .col-md-12, .col-md-8, .col-md-6, .col-md-4, .col-xs-12 {
+        padding: 1px;
+    }
+    img{
+        width: 50%;
+    }
+}
+.all-pending-order{
+
+}
+
+.pending-order{
+    background-color: #f9f9f9;
+}
+.all-canceled-order{
+    background-color: rgba(255, 0, 9, 0.1);
+}
+
+.completed-order{
+    background-color: #f9f9f9;
+}
+.canceled-order{
+    background-color: #f9f9f9;
+}

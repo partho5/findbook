@@ -1,0 +1,10 @@
+.col-md-12, .col-md-8, .col-md-4, .col-xs-12 {
+    padding: 0px;
+}
+.all-product-body{
+    background-color: #f1f1f1;
+}
+.all-product-wrapper{
+    background-color: #f9f9f9;
+    margin: 10px;
+}
