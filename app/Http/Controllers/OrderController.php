@@ -122,6 +122,7 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //Orders::find($id)->update(['deleted_at' => Carbon::now()]);
+
         Orders::find($id)->delete();
         return redirect()->back();
     }
