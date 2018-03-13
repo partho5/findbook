@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Products;
 use Illuminate\Http\Request;
 
 
@@ -24,7 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.index');
+        $products = Products::all();
+
+        return view('pages.index', [
+            'products'      => $products,
+        ]);
 
         $url = "http://code--projects.com/findbook/";
         $storeInfo = $this->getStoreInfo($url);

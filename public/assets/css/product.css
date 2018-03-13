@@ -8,3 +8,14 @@
     background-color: #f9f9f9;
     margin: 10px;
 }
+
+.success-msg{
+    background-color: #1f648b;
+    color: #fff;
+    font-size: 3vh;
+    padding: 10px;
+}
+.success-msg a{
+    color: #fff;
+    text-decoration: underline;
+}

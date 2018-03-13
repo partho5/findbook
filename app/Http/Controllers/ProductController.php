@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -13,7 +15,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('pages.product.index');
+        $products = Products::all()->take(20);
+
+        return view('pages.product.index', [
+            'products'      => $products,
+        ]);
     }
 
     /**
@@ -34,7 +40,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = Products::create($request->all());
+        Session::put('success_msg', "Product Added Successfully. You can edit from <a href='/product/".($product->id)."/edit'>here</a>");
+        return redirect()->back();
     }
 
     /**
@@ -45,7 +53,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        return $id;
     }
 
     /**
@@ -56,7 +64,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Products::findOrFail($id);
+
+        return view('pages.product.edit', [
+            'product'       => $product,
+        ]);
     }
 
     /**
@@ -68,7 +80,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //return $request->all();
+        unset($request['_token']);
+        unset($request['_method']);
+        Products::where('id', $id)->update($request->all());
+
+        return redirect('/product');
     }
 
     /**
@@ -79,6 +96,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Products::findOrFail($id)->delete();
+
+        return redirect()->back();
     }
 }

@@ -5,29 +5,47 @@
     <div id="middle-bar" class="col-md-8 col-md-push-2 text-left">
         <h2 class="text-center">My Orders</h2>
         <div class="col-md-12">
-            @for($i=0;$i<3;$i++)
+            @foreach($orders as $order)
             <div class="single-order row">
-                <img src="/assets/images/books/android.png" class="col-md-3 col-xs-12" width="100px" height="200px">
+                <img src="{{ $order->img_url }}" class="col-md-3 col-xs-12" width="100px" height="200px">
                 <div class="col-md-6">
-                    <p>Name : Android Programing</p>
-                    <p>Author : Some Author</p>
-                    <p>Price : 270 TK</p>
-                    <p>Qty : 1 pc (s)</p>
+                    <p>Name : {{ $order->product_name }}</p>
+                    <p>Author : {{ $order->author }}</p>
+                    <p>Unit Price : {{ $order->price }} TK</p>
+                    <p>Qty : {{ $order->quantity }} pc (s)</p>
                     <p>Total Price : 270+30=<b>300</b> TK</p>
                 </div>
                 <div class="col-md-3">
-                    <p>Ordered AT : 2/3/18</p>
-                    <p>Status : Delivered</p>
-                    <p>Shipped at : JN Hall , Room No 410</p>
-                    <p>Estimated Delivery Time : Tomorrow Evening</p>
+                    <p>Ordered at : {{ \Carbon\Carbon::parse($order->created_at)->format('F j , g:i A') }}</p>
+                    <p>Status : {{ $order->status_code }}</p>
+                    <p>Shipped at : {{ $order->full_address }}</p>
+                    <p class="hidden">Estimated Delivery Time : Tomorrow Evening</p>
                 </div>
-                <div class="col-md-12 text-center">
-                    <br>
-                    <a class="btn btn-success" href="">Edit Order</a>
-                    <a class="btn btn-danger" href="">Cancel Order</a>
+                <div class="col-md-8 text-right col-xs-12">
+                    <a class="col-md-4 col-xs-6" href="/order/{{ $order->id }}/edit">
+                        <button class="btn-success">Edit Order</button>
+                    </a>
+                    <form action="/order/{{ $order->id }}" method="post" class="col-md-4 col-xs-6">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="delete">
+                        <a href="/order/{{ $order->id }}">
+                            <button class="delete-order-btn btn-danger">Delete Order</button>
+                        </a>
+                    </form>
                 </div>
             </div>
-            @endfor
+            @endforeach
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('.delete-order-btn').click(function (e) {
+                if( ! confirm("Sure Delete This Order")){
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+    
 @endsection

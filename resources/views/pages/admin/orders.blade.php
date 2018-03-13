@@ -43,8 +43,9 @@
                             <div class="col-md-12">
                                 <div class="col-md-10 col-md-offset-1">
                                     <select class="form-control" size="1">
-                                        <option selected disabled>Action</option>
+                                        <option selected disabled>Execute</option>
                                         <option>Completed</option>
+                                        <option>Delivered</option>
                                         <option>Canceled</option>
                                     </select>
                                 </div>

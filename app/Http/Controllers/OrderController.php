@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Library\Library;
+use App\Orders;
+use App\Products;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -11,11 +15,28 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $Lib;
+
+    function __construct()
+    {
+        $this->Lib = new Library();
+    }
+
     public function index()
     {
+        $orders = Orders::orderBy('updated_at', 'desc')->get();
+        //return $orders;
+        foreach ($orders as $order){
+            $product = Products::findOrFail($order->product_id);
+            $order->product_name = $product->name;
+            $order->author = $product->author;
+            $order->price = $product->price;
+        }
 
-
-        return view('pages.order.index');
+        return view('pages.order.index', [
+            'orders'        => $orders,
+        ]);
     }
 
     /**
@@ -25,7 +46,12 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $id = @$_GET['product_id'];
+        $product = Products::findOrFail($id);
+
+        return view('pages.order.create', [
+            'product'       => $product,
+        ]);
     }
 
     /**
@@ -36,7 +62,10 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return $request->all();
+        $order = Orders::create($request->all());
+
+        return redirect('/order');
     }
 
     /**
@@ -47,7 +76,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        return view('pages.order.show');
+        //show single details
     }
 
     /**
@@ -58,7 +87,15 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $order = Orders::findOrFail($id);
+        $order['product'] = Products::findOrFail($order->product_id);
+        $order['pricingCalculator'] = $this->Lib->getPricingCalculation($order->quantity);
+
+        //return $order;
+
+        return view('pages.order.edit', [
+            'order'       => $order,
+        ]);
     }
 
     /**
@@ -70,7 +107,10 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        unset($request['_token']);
+        unset($request['_method']);
+        Orders::where('id', $id)->update($request->all());
+        return redirect('/order');
     }
 
     /**
@@ -81,7 +121,9 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Orders::find($id)->update(['deleted_at' => Carbon::now()]);
+        Orders::find($id)->delete();
+        return redirect()->back();
     }
 
     public function showInvoice(){

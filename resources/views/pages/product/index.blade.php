@@ -2,13 +2,8 @@
 
 <head>
     <title>All Products</title>
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="/assets/css/product.css">
@@ -23,52 +18,35 @@
             <div class="col-md-8 all-product-body">
                 <div class="col-md-12">
 
-
-                    {{--Left--}}
-                    <div class="col-md-6">
-                        <div class="col-md-12 all-product-wrapper">
-                            <div class="col-md-12">
-                                <img src="/assets/images/books/android.png" class="col-md-4 col-xs-12" alt=""width="100%" height="150px">
-                                <div class="col-md-8">
-                                    <p style="font-size: 18px;">Circuit Analysis Circuit Analysis Circuit Analysis</p>
-                                    <p>Author: O'relly O'relly O'relly O'relly </p>
-                                    <p>Price</p>
-                                    <p>Qty</p>
+                    @foreach($products as $product)
+                        <div class="col-md-6">
+                            <div class="col-md-12 all-product-wrapper">
+                                <div class="col-md-12">
+                                    <img src="{{ $product->img_url }}" class="col-md-4 col-xs-12" alt=""width="100%" height="150px">
+                                    <div class="col-md-8">
+                                        <p style="font-size: 18px;">{{ $product->name }}</p>
+                                        <p>Author: {{ $product->author }} </p>
+                                        <p>{{ $product->price }}</p>
+                                        <p>{{ $product->category_id }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-6 col-md-offset-3">
-                                    <button class="btn btn-success">Edit</button>
-                                    <button class="btn btn-danger">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{--Left End--}}
-
-
-                    {{--Right--}}
-                    <div class="col-md-6">
-                        <div class="col-md-12 all-product-wrapper">
-                            <div class="col-md-12">
-                                <img src="/assets/images/books/android.png" class="col-md-4 col-xs-12" alt=""width="100%" height="150px">
-                                <div class="col-md-8">
-                                    <p style="font-size: 18px;">Circuit Analysis Circuit Analysis Circuit Analysis</p>
-                                    <p>Author: O'relly O'relly O'relly O'relly </p>
-                                    <p>Price</p>
-                                    <p>Qty</p>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-6 col-md-offset-3">
-                                    <button class="btn btn-success">Edit</button>
-                                    <button class="btn btn-danger">Delete</button>
+                                <div class="col-md-12">
+                                    <div class="col-md-6 col-md-offset-3 text-center">
+                                        <div class="col-md-12">
+                                            <a href="/product/{{ $product->id }}/edit" class="col-md-4" style="all: unset">
+                                                <button class="btn-success">Edit</button>
+                                            </a>
+                                            <form action="/product/{{ $product->id }}" method="post" class="col-md-4">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="_method" value="delete">
+                                                <button class="product-delete-btn btn-danger" type="submit">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    {{--Right End--}}
-
+                    @endforeach
 
                 </div>
              </div>
@@ -76,9 +54,20 @@
 
             {{--Main Right--}}
             <div class="col-md-4">
-                some details
+                <h1 class="text-center">some details</h1>
             </div>
             {{--Main Right ENd--}}
         </div>
+    </div>
+    <script>
+
+        $(document).ready(function () {
+            $('.product-delete-btn').click(function (e) {
+                if( ! confirm("Sure Delete ?")){
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

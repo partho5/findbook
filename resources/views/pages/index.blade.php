@@ -12,10 +12,10 @@ $agent = new Agent();
             @endif
 
             <div id="header-search" class="skip-content">
-                <form id="search_mini_form" action="https://code--projects.com/magento/catalogsearch/result/" method="get">
+                <form id="search_mini_form" action="" method="get">
                     <div class="input-box">
                         <br>
-                        <input id="search" type="search" name="q" value="" class="input-text required-entry" maxlength="128" placeholder="Search entire store here..." style="border-radius: 0px; height: 33px; border: 1px solid #000" />
+                        <input id="search" type="search" name="q" value="" class="input-text required-entry" maxlength="128" placeholder="Search entire store here..." style="border-radius: 0px; height: 33px; border: 1px solid #000; width: 250px" />
                         <button type="submit" title="Search" class="button search-button"><span><span>Search</span></span></button>
                     </div>
                 </form>
@@ -30,20 +30,20 @@ $agent = new Agent();
             <a href="/dash">Orders</a>
             <h2><span>Book Category Science</span></h2>
 
-            @for($i=0; $i<9; $i++)
+            @foreach($products as $product)
                 <div class="box col-md-4">
                     <div class="single-product col-md-12">
                         <img src="/assets/images/books/android.png" alt="">
                     </div>
                     <div class="about-product">
-                        <a href="/order/{{ $i }}" class="purchase-btn col-md-12" data-balloon="Tk 190 only" data-balloon-pos="up">Purchase</a>
+                        <a href="/order/create?product_id={{ $product->id }}" class="purchase-btn col-md-12" data-balloon="Tk 190 only" data-balloon-pos="up">Purchase</a>
                         <figcaption>
                             <p>Name : Android Programing</p>
                             <p>Author : O'Reilly</p>
                         </figcaption>
                     </div>
                 </div>
-            @endfor
+            @endforeach
         </div>
     </div>
 
