@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Library\VariableCollection;
 use App\Products;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,13 @@ class HomeController extends Controller
      *
      * @return void
      */
+
+    private $variables;
+
     public function __construct()
     {
         //$this->middleware('auth');
+        $this->variables = new VariableCollection();
     }
 
     /**
@@ -26,6 +31,13 @@ class HomeController extends Controller
     public function index()
     {
         $products = Products::all();
+        $productImgPrefix = $this->variables->awsUrlPrefix();
+
+        foreach ($products as $product){
+            $product->product_img_url = $productImgPrefix."/".$this->variables->awsBucketName()."/".$product->img_url;
+        }
+
+        //return $products;
 
         return view('pages.index', [
             'products'      => $products,

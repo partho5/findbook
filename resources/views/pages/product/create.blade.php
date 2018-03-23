@@ -70,7 +70,7 @@
             <div class="form-group">
                 <label for="" class="col-md-5">Image</label>
                 <div class="input-group col-md-7">
-                    <input type="file" name="img_url" class="form-control" required >
+                    <input type="file" name="product_img" class="form-control" required >
                 </div>
             </div>
 

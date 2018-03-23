@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Library\VariableCollection;
 use App\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -13,9 +15,21 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private $variables;
+
+    function __construct()
+    {
+        $this->variables = new VariableCollection();
+    }
+
     public function index()
     {
         $products = Products::all()->take(20);
+
+        foreach ($products as $product){
+            $product->product_img_url = $this->variables->awsUrlPrefix()."/".$this->variables->awsBucketName()."/".$product->img_url;
+        }
 
         return view('pages.product.index', [
             'products'      => $products,
@@ -40,7 +54,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = Products::create($request->all());
+        $fileObj = $request->file('product_img');
+        $fileOriginalName = $fileObj->getClientOriginalName();
+        $uniqueName = $fileObj->hashName();
+        $filePath = ( $this->variables->awsFolderName() )."/$fileOriginalName/$uniqueName";
+        $request['img_url'] = $filePath;
+
+        $pathToUpload = ( $this->variables->awsFolderName() )."/".$fileOriginalName;
+        Storage::disk('s3')->put($pathToUpload, $fileObj, "public");
+
+        $product = Products::create($request->except(['product_img']));
         Session::put('success_msg', "Product Added Successfully. You can edit from <a href='/product/".($product->id)."/edit'>here</a>");
         return redirect()->back();
     }
@@ -81,9 +104,24 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //return $request->all();
+
+        if( $request->file('product_img') ){
+            $fileObj = $request->file('product_img');
+            $fileOriginalName = $fileObj->getClientOriginalName();
+            $uniqueName = $fileObj->hashName();
+            $filePath = ( $this->variables->awsFolderName() )."/$fileOriginalName/$uniqueName";
+            $request['img_url'] = $filePath;
+
+            $pathToUpload = ( $this->variables->awsFolderName() )."/".$fileOriginalName;
+            Storage::disk('s3')->put($pathToUpload, $fileObj, "public");
+        }
+
         unset($request['_token']);
         unset($request['_method']);
-        Products::where('id', $id)->update($request->all());
+
+        //return $request->except(['product_img']);
+
+        Products::where('id', $id)->update($request->except(['product_img']));
 
         return redirect('/product');
     }

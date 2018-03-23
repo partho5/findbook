@@ -22,7 +22,7 @@
                         <div class="col-md-6">
                             <div class="col-md-12 all-product-wrapper">
                                 <div class="col-md-12">
-                                    <img src="{{ $product->img_url }}" class="col-md-4 col-xs-12" alt=""width="100%" height="150px">
+                                    <img src="{{ $product->product_img_url }}" class="col-md-4 col-xs-12" alt=""width="100%" height="150px">
                                     <div class="col-md-8">
                                         <p style="font-size: 18px;">{{ $product->name }}</p>
                                         <p>Author: {{ $product->author }} </p>

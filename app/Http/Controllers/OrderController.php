@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Library\Library;
+use App\Library\VariableCollection;
 use App\Orders;
+use App\Processor\Offers;
 use App\Products;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class OrderController extends Controller
 {
@@ -16,23 +18,30 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected $Lib;
+    protected $Lib, $offers, $variables;
 
     function __construct()
     {
         $this->Lib = new Library();
+        $this->offers = new Offers();
+        $this->variables = new VariableCollection();
     }
 
     public function index()
     {
-        $orders = Orders::orderBy('updated_at', 'desc')->get();
-        //return $orders;
+        $orders = Orders::orderBy('updated_at', 'desc')->where('browser_id', Cookie::get("browser_id"))->get();
         foreach ($orders as $order){
             $product = Products::findOrFail($order->product_id);
+
+            $order->product_img_url = $this->variables->awsUrlPrefix()."/".$this->variables->awsBucketName()."/".$product->img_url;
             $order->product_name = $product->name;
             $order->author = $product->author;
             $order->price = $product->price;
+            $order->delivery_charge = $this->offers->getDeliveryCharge($order->quantity);
+            $order->discount = $this->offers->getDiscount($order->quantity);
         }
+
+        //return $orders;
 
         return view('pages.order.index', [
             'orders'        => $orders,
@@ -48,6 +57,8 @@ class OrderController extends Controller
     {
         $id = @$_GET['product_id'];
         $product = Products::findOrFail($id);
+
+        $product->product_img_url = $this->variables->awsUrlPrefix()."/".$this->variables->awsBucketName()."/".$product->img_url;
 
         return view('pages.order.create', [
             'product'       => $product,
@@ -65,7 +76,7 @@ class OrderController extends Controller
         //return $request->all();
         $order = Orders::create($request->all());
 
-        return redirect('/order');
+        return redirect('/order')->withCookie(cookie("browser_id", $request['browser_id'], 60*24*365*2));
     }
 
     /**
@@ -87,8 +98,15 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
+        $checkOrder = Orders::where('browser_id', Cookie::get("browser_id"))->where('id', $id)->get();
+        if(count($checkOrder) == 0 ){
+            return abort(401);
+        }
+
         $order = Orders::findOrFail($id);
         $order['product'] = Products::findOrFail($order->product_id);
+
+        $order->product_img_url = $this->variables->awsUrlPrefix()."/".$this->variables->awsBucketName()."/".$order['product']->img_url;
         $order['pricingCalculator'] = $this->Lib->getPricingCalculation($order->quantity);
 
         //return $order;
@@ -107,6 +125,9 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        //return $request->all();
+
         unset($request['_token']);
         unset($request['_method']);
         Orders::where('id', $id)->update($request->all());

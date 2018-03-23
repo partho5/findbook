@@ -6,11 +6,12 @@
         <form action="/order/{{ $order->id }}" method="post" id="place-order-form">
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="put">
-            <input type="hidden" name="product_id" value="{{ $order->id }}">
+            <input type="hidden" name="product_id" value="{{ $order['product']->id }}">
+            <input type="hidden" name="browser_id" value="{{ Cookie::get("browser_id") }}">
 
         <div class="col-md-12" style="margin-top: 20px; padding: 0px" id="checkout-wrapper">
-            <div class="product-image col-md-4">
-                <img src="{{ $order->img_url }}" width="100%" height="280px" alt="">
+            <div class="product-image col-md-3">
+                <img src="{{ $order->product_img_url }}" width="100%" height="250px" alt="">
             </div>
             <div class="col-md-6 col-md-offset-1 book-details">
                 <p><a href="/order" class="btn btn-info col-md-12">Don't Edit & Go Back</a></p>
@@ -58,7 +59,6 @@
         </div>
 
             <div class="col-md-12" style="margin-top: 20px; padding: 0px">
-                <h2 class="text-center">Please Fill Up All Fields</h2>
                 <div class="form-group">
                     <div class="input-group col-md-12">
                         <label for="" class="col-md-3">My Name</label>
@@ -98,7 +98,7 @@
                 <div class="form-group">
                     <div class="input-group col-md-12">
                         <div class="col-md-4 col-md-offset-4">
-                            <input type="submit" class="btn btn-success" value="Save Data">
+                            <input type="submit" class="btn btn-success" value="Confirm Order">
                         </div>
                         <div class="col-md-4">
                             <a href="/order" class="btn btn-info">Don't Save & Go Back</a>
@@ -110,7 +110,11 @@
     </div>
 
     <script type="text/javascript" src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs/0.5.3/fingerprint.js"></script>
     <script>
+
+        console.log("Fingerprint : "+new Fingerprint().get());
+
 
         var unitPrice = "{{ $order['product']->price }}";
         var shippingCost = "{{ $order['pricingCalculator']['shippingCost'] }}";

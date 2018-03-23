@@ -26,20 +26,22 @@ $agent = new Agent();
         </div>
 
         <div id="product-cat-1" class="col-md-12" style="padding: 0px"><br><br>
-            <a href="/product"> Products</a> <br>
-            <a href="/dash">Orders</a>
-            <h2><span>Book Category Science</span></h2>
+            <h2><span>Book Category : Science</span></h2>
 
             @foreach($products as $product)
-                <div class="box col-md-4">
+                <div class="box single-product-wrapper col-md-4">
+                    <div class="some">rttrrty rtrt <br> lrjj rf er</div>
                     <div class="single-product col-md-12">
-                        <img src="/assets/images/books/android.png" alt="">
+                        <img src="{{ $product->product_img_url }}" alt="">
                     </div>
                     <div class="about-product">
-                        <a href="/order/create?product_id={{ $product->id }}" class="purchase-btn col-md-12" data-balloon="Tk 190 only" data-balloon-pos="up">Purchase</a>
+                        <div class="col-md-12 col-xs-12">
+                            <p class="price-label col-md-6 col-xs-6" data-balloon-pos="up">{{ $product->price }} Tk</p>
+                            <a href="/order/create?product_id={{ $product->id }}" class="purchase-btn col-md-6 col-xs-6" data-balloon="Tk {{ $product->price }} only" data-balloon-pos="up">Purchase</a>
+                        </div>
                         <figcaption>
-                            <p>Name : Android Programing</p>
-                            <p>Author : O'Reilly</p>
+                            <p class="product-name">{{ $product->name }}</p>
+                            <p>Author : {{ $product->author }}</p>
                         </figcaption>
                     </div>
                 </div>
@@ -53,7 +55,7 @@ $agent = new Agent();
         $(document).ready(function () {
             $('.box').hover(function () {
                 $(this).find('.some').animate({
-                    width : '100%',
+                    width : '90%',
                     opacity : 1
                 });
             });
@@ -62,8 +64,17 @@ $agent = new Agent();
                 $(this).find('.some').animate({
                     width : '0px',
                     opacity : 0
-                });
+                }, 10);
             });
+
+
+            var allHeights = [];
+            $('.about-product').each(function (i) {
+                allHeights.push($(this).height());
+            });
+            //https://stackoverflow.com/questions/11985341/get-max-and-min-value-from-array-in-javascript
+            var maxHeight = Math.max.apply(Math,allHeights);
+            $('.about-product').height(maxHeight);
         });
     </script>
 

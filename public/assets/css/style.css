@@ -108,7 +108,10 @@ nav {
 #middle-bar .box .single-product{
     background-color: #ededef;
     padding: 10px 0px;
-    border: 1px solid rgba(91, 91, 91, 0.85);
+    border: 1px solid rgba(130, 130, 130, 0.51);
+}
+#middle-bar .box .single-product{
+    background-color: #fff;
 }
 #middle-bar .box .single-product img{
     border: 1px solid rgb(252, 111, 0);
@@ -129,21 +132,35 @@ nav {
     transform: scale(1.1);
 }
 #middle-bar .box .about-product{
-    background-color: rgba(245, 171, 126, 0.3);
+    //background-color: rgba(245, 171, 126, 0.3);
     color: #0082c4;
+    color: rgba(104, 104, 104, 0.86);
     border: 1px solid rgba(175, 122, 90, 0.69);
     box-shadow: 3px 3px 3px 3px rgba(175, 175, 175, 0.35);
+}
+.about-product .product-name{
+    color: rgb(57, 57, 57);
 }
 #middle-bar .box .about-product:hover{
 
 }
+.price-label {
+    margin-top: 20px;
+    color: #f00;
+    background-color:#fff;
+    border: 2px solid  rgba(220, 220, 220, 0.93);
+    padding: 2px;
+    font-size: 1.5em;
+}
+
 .download-btn, .purchase-btn{
     margin-top: 20px;
     color: #fff;
     background-color: rgba(251, 111, 1, 0.97);
+    background-color: #0082c4;
     border: 2px solid  rgba(220, 220, 220, 0.93);
     padding: 2px;
-    height: 30px;
+    font-size: 1.5em;
 }
 .download-btn{
     opacity: 0.4;
@@ -156,7 +173,7 @@ nav {
     text-decoration: none;
     border: 2px solid #fff;
     background-color: #ff4500;
-    transition: 1s;
+    transition: 0.5s;
 }
 
 
@@ -168,8 +185,9 @@ nav {
     position: absolute;
     top: 20%;
     z-index: 1;
-    background-color: #ff4500;
-    color: #fff;
+    //background-color: #ff4500;
+    background-color: rgba(0, 161, 191, 0.8);
+    color: #000;
     font-size: 15px;
     //padding: 10px 20px;
     width: 0px;

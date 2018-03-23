@@ -5,8 +5,8 @@
     <div id="middle-bar" class="col-md-8 col-md-push-2 text-left" style="padding: 0px">
         <form action="/order" method="post" id="place-order-form">
         <div class="col-md-12" style="margin-top: 20px; padding: 0px" id="checkout-wrapper">
-            <div class="product-image col-md-4">
-                <img src="{{ $product->img_url }}" width="100%" height="280px" alt="">
+            <div class="product-image col-md-3">
+                <img src="{{ $product->product_img_url }}" width="100%" height="250px" alt="">
             </div>
             <div class="col-md-6 col-md-offset-1 book-details">
                 <p style="color: #1b6d85">{{ $product->name }}</p>
@@ -53,13 +53,14 @@
 
             {{ csrf_field() }}
             <input type="hidden" name="product_id" value="{{ $product->id }}">
+            <input type="hidden" name="browser_id" id="browser_id_field" value="">
             <div class="col-md-12" style="margin-top: 20px; padding: 0px">
                 <h2 class="text-center">Please Fill Up All Fields</h2>
                 <div class="form-group">
                     <div class="input-group col-md-12">
                         <label for="" class="col-md-3">My Name</label>
                         <div class="col-md-9 col-xs-12">
-                            <input name="customer_name" type="text" class="form-control" placeholder="Full Name" required>
+                            <input name="customer_name" type="text" class="form-control" placeholder="Full Name" required value="Partho Protim">
                         </div>
                     </div>
                 </div>
@@ -67,7 +68,7 @@
                     <div class="input-group col-md-12">
                         <label for="" class="col-md-3">Full Address</label>
                         <div class="col-md-9 col-xs-12">
-                            <textarea name="full_address" class="form-control" rows="4" placeholder="Please ensure your full address" required>Hall Name:                                         Room No:</textarea>
+                            <textarea name="full_address" class="form-control" rows="4" placeholder="Please ensure your full address" required>Hall/Room/Department</textarea>
                         </div>
                     </div>
                 </div>
@@ -76,7 +77,7 @@
                     <div class="input-group col-md-12">
                         <label for="" class="col-md-3">Email</label>
                         <div class="col-md-9 col-xs-12">
-                            <input name="email" type="text" class="form-control" placeholder="You will get order information in this email" required>
+                            <input name="email" type="text" class="form-control" placeholder="You will get order information in this email" required value="partho8181bd@gmail.com">
                         </div>
                     </div>
                 </div>
@@ -85,7 +86,7 @@
                     <div class="input-group col-md-12">
                         <label for="" class="col-md-3">Mobile</label>
                         <div class="col-md-9 col-xs-12">
-                            <input name="phone" type="text" class="form-control" placeholder="Needed to contact you" required>
+                            <input name="phone" type="text" class="form-control" placeholder="Needed to contact you" required value="01781603405">
                         </div>
                     </div>
                 </div>
@@ -103,6 +104,7 @@
     </div>
 
     <script type="text/javascript" src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs/0.5.3/fingerprint.js"></script>
     <script>
 
         var unitPrice = "{{ $product->price }}";
@@ -145,6 +147,9 @@
 
         // https://stackoverflow.com/questions/469357/html-text-input-allows-only-numeric-input
         $(document).ready(function() {
+
+            $('#browser_id_field').val(new Fingerprint().get());
+
             $("#unit").keydown(function (e) {
                 // Allow: backspace, delete, tab, escape, enter and .
                 if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||

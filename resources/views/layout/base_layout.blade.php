@@ -47,15 +47,17 @@
         <h3 class="text-center hidden" style="color: #f00">Under development !!</h3>
         <div class="row">
             @yield('middle-bar')
-            <div id="left-bar" class="col-md-2 col-md-pull-8 col-sm-6 text-center">
-                <div class="col-md-12">
+            <div id="left-bar" class="col-md-2 col-md-pull-8 col-sm-6 text-center" style="padding: 0px">
+                <div class="col-md-12" style="margin: 10px 0px; padding: 0px">
                     <img src="/assets/images/books/c-sharp.jpeg" alt="">
                 </div>
-
-                <div class="col-md-12">
+                <div class="col-md-12" style="margin: 10px 0px; padding: 0px">
                     <img src="/assets/images/books/c-sharp.jpeg" alt="">
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12" style="margin: 10px 0px; padding: 0px">
+                    <img src="/assets/images/books/c-sharp.jpeg" alt="">
+                </div>
+                <div class="col-md-12" style="margin: 10px 0px; padding: 0px">
                     <img src="/assets/images/books/c-sharp.jpeg" alt="">
                 </div>
             </div>
@@ -85,17 +87,6 @@
                     </div>
                 </div>
                 <hr>
-                <h4 class="text-center">Some Heading 2</h4>
-                <p class="bg-2"> >> gk jgn  ty ityiyt  fdsf</p>
-                <p class="bg-2"> >> gk jgn  ty ityiyt  fdsf</p>
-                <p class="bg-2"> >> gk jgn  ty ityiyt  fdsf</p>
-                <p class="bg-2"> >> gk jgn  ty ityiyt  fdsf</p>
-                <hr>
-                <h4 class="text-center">Some Heading 3</h4>
-                <p> >> gk jgn  ty ityiyt  fdsf</p>
-                <p> >> gk jgn  ty ityiyt  fdsf</p>
-                <p> >> gk jgn  ty ityiyt  fdsf</p>
-                <p> >> gk jgn  ty ityiyt  fdsf</p>
             </div>
         </div>
     </div>

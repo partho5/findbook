@@ -72,7 +72,7 @@
                 <label for="" class="col-md-5">Image</label>
                 <div class="input-group col-md-7">
                     <img src="{{ $product->img_url }}" alt="" width="200px" height="200px">
-                    <input type="file" name="img_url" class="form-control" >
+                    <input type="file" name="product_img" class="form-control" >
                 </div>
             </div>
 
