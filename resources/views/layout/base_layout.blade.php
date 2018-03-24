@@ -1,3 +1,22 @@
+<?php
+
+use App\Products;
+use \App\Library\VariableCollection;
+
+$variables = new VariableCollection();
+
+$products = Products::all();
+$productImgPrefix = $variables->awsUrlPrefix();
+
+
+foreach ($products as $product){
+    $product->product_img_url = $productImgPrefix."/".$variables->awsBucketName()."/".$product->img_url;
+}
+
+
+?>
+
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -9,6 +28,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,600">
 
@@ -25,13 +45,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/" style="color: #000">Find Book</a>
+                    <a class="navbar-brand" href="/" >Find Book</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="/">Home</a></li>
+                        <li><a href="/">Register</a></li>
+                        <li><a href="/">Login</a></li>
                         {{--@foreach($rootCategories as $category)--}}
                             {{--<li><a href="">{{ $category }}</a></li>--}}
                         {{--@endforeach--}}
@@ -47,20 +69,66 @@
         <h3 class="text-center hidden" style="color: #f00">Under development !!</h3>
         <div class="row">
             @yield('middle-bar')
+
             <div id="left-bar" class="col-md-2 col-md-pull-8 col-sm-6 text-center" style="padding: 0px">
-                <div class="col-md-12" style="margin: 10px 0px; padding: 0px">
-                    <img src="/assets/images/books/c-sharp.jpeg" alt="">
+
+                <div>
+                    <p>Something</p>
+                    <p>Something</p>
+                    <p>Something</p>
+                    <p>Something</p>
+                    <p>Something</p>
                 </div>
-                <div class="col-md-12" style="margin: 10px 0px; padding: 0px">
-                    <img src="/assets/images/books/c-sharp.jpeg" alt="">
+                <div class="left-box single-left-product-wrapper">
+                    <div class="some">rttrrty rtrt <br> lrjj rf er</div>
+                    <div class="single-left-product">
+                        <img src="{{ $product->product_img_url }}" alt="" width="50%">
+                    </div>
+                    <div class="about-left-product">
+                        <div class="col-md-12 col-xs-12">
+                            <p class="left-price-label col-md-6 col-xs-6" data-balloon-pos="up">{{ $product->price }} Tk</p>
+                            <a href="/order/create?product_id={{ $product->id }}" class="left-purchase-btn col-md-6 col-xs-6" data-balloon="Delivery Charge 30 Tk only" data-balloon-pos="up">Purchase</a>
+                        </div>
+                        <figcaption>
+                            <span class="left-product-name">{{ $product->name }}</span><br>
+                            <span class="left-author">Author : {{ $product->author }}</span>
+                        </figcaption>
+                    </div>
                 </div>
-                <div class="col-md-12" style="margin: 10px 0px; padding: 0px">
-                    <img src="/assets/images/books/c-sharp.jpeg" alt="">
+                <div class="left-box single-left-product-wrapper">
+                    <div class="some">rttrrty rtrt <br> lrjj rf er</div>
+                    <div class="single-left-product">
+                        <img src="{{ $product->product_img_url }}" alt="" width="50%">
+                    </div>
+                    <div class="about-left-product">
+                        <div class="col-md-12 col-xs-12">
+                            <p class="left-price-label col-md-6 col-xs-6" data-balloon-pos="up">{{ $product->price }} Tk</p>
+                            <a href="/order/create?product_id={{ $product->id }}" class="left-purchase-btn col-md-6 col-xs-6" data-balloon="Delivery Charge 30 Tk only" data-balloon-pos="up">Purchase</a>
+                        </div>
+                        <figcaption>
+                            <span class="left-product-name">{{ $product->name }}</span><br>
+                            <span class="left-author">Author : {{ $product->author }}</span>
+                        </figcaption>
+                    </div>
                 </div>
-                <div class="col-md-12" style="margin: 10px 0px; padding: 0px">
-                    <img src="/assets/images/books/c-sharp.jpeg" alt="">
-                </div>
-            </div>
+
+                <div class="left-box single-left-product-wrapper">
+                    <div class="some">rttrrty rtrt <br> lrjj rf er</div>
+                    <div class="single-left-product">
+                        <img src="{{ $product->product_img_url }}" alt="" width="50%">
+                    </div>
+                    <div class="about-left-product">
+                        <div class="col-md-12 col-xs-12">
+                            <p class="left-price-label col-md-6 col-xs-6" data-balloon-pos="up">{{ $product->price }} Tk</p>
+                            <a href="/order/create?product_id={{ $product->id }}" class="left-purchase-btn col-md-6 col-xs-6" data-balloon="Delivery Charge 30 Tk only" data-balloon-pos="up">Purchase</a>
+                        </div>
+                        <figcaption>
+                            <span class="left-product-name">{{ $product->name }}</span><br>
+                            <span class="left-author">Author : {{ $product->author }}</span>
+                        </figcaption>
+                    </div>
+                </div>            </div>
+
             <div id="right-bar" class="col-md-2 col-sm-6">
                 <h4 class="text-center">Need a book that isn't here ?</h4>
                 <div id="book-request-container" class="col-md-12">

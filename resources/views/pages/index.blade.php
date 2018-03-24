@@ -21,11 +21,11 @@ $agent = new Agent();
                 </form>
             </div>
 
-            <h3 style="color: #fff; font-size: 30px; margin-top: 50px">The Fastest Book Gateway</h3>
-            <p>1 Click Download, Purchase at Cheap</p>
+            {{--<h3 style="color: #fff; font-size: 30px; margin-top: 50px">The Fastest Book Gateway</h3>--}}
+            {{--<p>1 Click Download, Purchase at Cheap</p>--}}
         </div>
 
-        <div id="product-cat-1" class="col-md-12" style="padding: 0px"><br><br>
+        <div id="product-cat-1" class="col-md-12" style="padding: 0px">
             <h2><span>Book Category : Science</span></h2>
 
             @foreach($products as $product)
@@ -37,7 +37,7 @@ $agent = new Agent();
                     <div class="about-product">
                         <div class="col-md-12 col-xs-12">
                             <p class="price-label col-md-6 col-xs-6" data-balloon-pos="up">{{ $product->price }} Tk</p>
-                            <a href="/order/create?product_id={{ $product->id }}" class="purchase-btn col-md-6 col-xs-6" data-balloon="Tk {{ $product->price }} only" data-balloon-pos="up">Purchase</a>
+                            <a href="/order/create?product_id={{ $product->id }}" class="purchase-btn col-md-6 col-xs-6" data-balloon="Delivery Charge 30 Tk only" data-balloon-pos="up">Purchase</a>
                         </div>
                         <figcaption>
                             <p class="product-name">{{ $product->name }}</p>

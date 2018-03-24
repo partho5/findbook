@@ -17,10 +17,13 @@ class Offers
     {
     }
 
+    public $minQtyForFreeDelivery = 1; // after crossing this quantity, all products are shipped FREE
+
+    public $deliveryChargeForSingleProduct = 30;
     public function getDeliveryCharge($quantity){
         $charge = 0;
         if ($quantity >=1 && $quantity <= 4){
-            $charge = 30;
+            $charge = $this->deliveryChargeForSingleProduct;
         }
         return $charge;
     }

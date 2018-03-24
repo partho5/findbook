@@ -30,22 +30,30 @@
     /*background: linear-gradient(to bottom, rgba(26, 49, 95, 0) 0%, rgba(26, 49, 95, 1) 100%);*/
     /*filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#001a315f', endColorstr='#1a315f', GradientType=0);*/
 }
+.navbar-brand {
+    color: #5cb85c !important;
+    font-family: 'Patua One', cursive;
+}
 
 nav {
     margin-top: 0px;
 }
 .navbar-default .navbar-nav li a{
-    color: #000;
-    border: 2px solid rgba(0, 154, 181, 0.67);
-    font-size: 1.3em;
+    color: rgba(115, 115, 115, 0.94) !important;
+    //border: 4px solid rgba(255, 255, 255, 0.11);
+    font-size: 1.1em;
     font-weight: 700;
+    box-sizing: border-box;
 }
 .navbar-default .navbar-nav li a:hover{
-    border: 2px solid #fff;
-    background-color: #0080FF ;
+    box-shadow: inset 0 -3px 0 #0082c4;
+     //border-bottom : 4px solid rgba(0, 124, 151, 0.94);
+    //background-color:  rgba(0, 124, 151, 0.94) !important;
+    transition: 0.35s;
 }
 #menu-bar{
-    background-color: #0095af ;
+    //background-color: #0095af ;
+    background-color: #f8f8f8;
 }
 #menu-bar li a{
     color: #fff;
@@ -96,8 +104,8 @@ nav {
 }
 
 #logo{
-    width: 280px;
-    height: 180px;
+    width: 200px;
+    height: 100px;
 }
 #middle-bar{
     //border: 1px solid #0080FF88;
@@ -197,4 +205,59 @@ nav {
 .box:hover .some{
     //display: block;
     z-index: 3;
+}
+
+/*Some left bar design*/
+
+
+#left-bar{
+
+}
+
+#left-bar .left-box{
+    border: 1px solid rgba(211, 211, 211, 0.4);
+    margin-top: 5px;
+}
+ #left-bar .left-box .about-left-product{
+
+}
+
+#left-bar .box .single-left-product{
+
+}
+.single-left-product{
+    margin-bottom: 1em;
+}
+#left-bar .box .single-left-product img{
+
+}
+.single-left-product img:hover{
+
+}
+
+
+.left-box{
+
+}
+.some{
+
+}
+.left-box:hover .some{
+
+}
+.left-price-label{
+    color: #f00;
+    padding: 2px;
+}
+.about-left-product .left-product-name {
+    color: rgba(0, 154, 181, 0.75);
+    font-size: small;
+}
+.about-left-product .left-author{
+    color: rgb(144, 144, 144);
+    font-size: smaller;
+}
+.left-purchase-btn{
+    color: #00c46d;
+    text-decoration: none;
 }

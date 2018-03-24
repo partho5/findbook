@@ -29,7 +29,11 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = Orders::orderBy('updated_at', 'desc')->where('browser_id', Cookie::get("browser_id"))->get();
+        $orders = Orders::where('browser_id', Cookie::get("browser_id"))->where('status_code', '!=', 20)
+            ->orderBy('updated_at', 'desc')->get();
+        // status_code < 20 implies -----> customer didn't get the product in hand, i.e. a pending order
+
+        $numberOfProduct = 1;
         foreach ($orders as $order){
             $product = Products::findOrFail($order->product_id);
 
@@ -37,7 +41,12 @@ class OrderController extends Controller
             $order->product_name = $product->name;
             $order->author = $product->author;
             $order->price = $product->price;
-            $order->delivery_charge = $this->offers->getDeliveryCharge($order->quantity);
+            if($numberOfProduct++ > $this->offers->minQtyForFreeDelivery){
+                //if more than $minQtyForFreeDelivery product(s)
+                $order->delivery_charge = 0;
+            }else{
+                $order->delivery_charge = $this->offers->getDeliveryCharge($order->quantity);
+            }
             $order->discount = $this->offers->getDiscount($order->quantity);
         }
 

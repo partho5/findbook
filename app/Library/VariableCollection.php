@@ -30,4 +30,18 @@ class VariableCollection
     public function awsFolderName(){
         return 'products';
     }
+
+    public function orderStatus(){
+        return [
+
+            0   => 'Order cancelled',
+            5   => 'Order placed',
+            10  => 'Order received',
+            15  => 'Shipped to your address',
+            20  => 'You received product in hand', // THIS status_code "MUST ALWAYS" BE FIXED, change others if required.
+
+            25  => 'Returned order', //due to damaged product
+            30  => 'Change order pending'
+        ];
+    }
 }
