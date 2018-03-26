@@ -55,7 +55,7 @@ foreach ($products as $product){
                         <li><a href="/">Register</a></li>
                         <li><a href="/">Login</a></li>
                         {{--@foreach($rootCategories as $category)--}}
-                            {{--<li><a href="">{{ $category }}</a></li>--}}
+                        {{--<li><a href="">{{ $category }}</a></li>--}}
                         {{--@endforeach--}}
                     </ul>
 
@@ -135,22 +135,28 @@ foreach ($products as $product){
                     <div class="form-group">
                         <div class="input-group">
                             <span>Book Name</span>
-                            <input type="text" id="requested-book-name" class="form-control" placeholder="Specify Edition if needed">
+                            <input type="text" id="requested-book-name" name="book" class="form-control" placeholder="Specify Edition if needed">
                         </div>
                         <div class="input-group">
                             <span>Writer Name</span>
-                            <input type="text" id="requested-book-writer" class="form-control">
+                            <input type="text" id="requested-book-writer" name="writer" class="form-control">
                         </div>
                         <div class="input-group">
                             <span>Your Mobile Number</span>
-                            <input type="text" id="requester-mobile-num" class="form-control" value="01">
+                            <input type="text" id="requester-mobile-num" name="mobile" class="form-control" value="01">
                         </div>
                         <div class="input-group">
-                            <span>Address</span>
-                            <input type="text" id="requester-address" class="form-control" placeholder="Provide Complete Address">
+                            <span>Email</span>
+                            <input type="email" name="email" id="requester-email" class="form-control">
                         </div>
                         <div class="input-group">
-                            <button class="btn btn-success">Order Book</button>
+                            <span><b>Full</b> Address</span>
+                            <textarea placeholder="Provide Complete Address" id="requester-address" rows="4"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <br>
+                            <input type="hidden" id="browser_id" value="">
+                            <button class="btn btn-success" id="request-custom-order-btn">Order Book</button>
                         </div>
                     </div>
                 </div>
@@ -158,6 +164,8 @@ foreach ($products as $product){
             </div>
         </div>
     </div>
+</div>
+
 </div>
 
 
@@ -185,7 +193,7 @@ foreach ($products as $product){
                         if( response === 'success' ){
                             $('#book-request-container input, textarea').each(function () {
                                 $(this).val("");
-                                alert("OrdersControllerHelper received. Please Check email");
+                                alert("Order received. Please Check email");
                             });
                         }
                     }, error : function () { alert("Please try again after reloading page"); }

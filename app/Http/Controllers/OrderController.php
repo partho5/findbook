@@ -170,4 +170,8 @@ class OrderController extends Controller
     public function showInvoice(){
         return view('pages.mail.invoice');
     }
+
+    public function requestCustomOrder(Request $request){
+        echo 'success';
+    }
 }
