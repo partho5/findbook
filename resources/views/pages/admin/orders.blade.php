@@ -1,147 +1,88 @@
 <html>
+
 <head>
-    <title>All Orders</title>
-    <!-- Latest compiled and minified CSS -->
+    <title>All Products</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="/assets/css/admin/orders.css">
+    <link rel="stylesheet" href="/assets/css/product.css">
+
 </head>
-
 <body>
+<div class="col-md-12">
+    <h3 class="text-center">Pending Orders</h3>
     <div class="col-md-12">
-
-        {{--Pending--}}
-
-        <div class="col-md-8">
-            <h3 class="text-center">Pending</h3>
-                <div class="col-md-12 pending-order">
-                    <img src="/assets/images/books/android.png" class="col-md-4 col-xs-12"  width="80%" height="200px">
-                    <div class="col-md-4">
-                        <p>Name : Android Programing</p>
-                        <p>Author : Some Author</p>
-                        <p>Price : 270 TK</p>
-                        <p>Qty : 1 pc (s)</p>
-                        <p>Total Price : 270+30=<b>300</b> TK</p>
-                    </div>
-                    <div class="col-md-4">
-                        <p>Ordered AT : 2/3/18</p>
-                        <p>Status : Delivered</p>
-                        <p>Shipping Add : JN Hall , Room No 410</p>
-                        <p>Mobile : 01750366927</p>
-                    </div>
-                    <div class="col-md-12 text-center">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            <a class="btn btn-danger" href="">Edit Order</a></div>
-                        <div class="col-md-4">
-                            <div class="col-md-12">
-                                <div class="col-md-10 col-md-offset-1">
-                                    <select class="form-control" size="1">
-                                        <option selected disabled>Execute</option>
-                                        <option>Completed</option>
-                                        <option>Delivered</option>
-                                        <option>Canceled</option>
-                                    </select>
-                                </div>
+        <div class="col-md-9">
+            <div id="order-wrapper">
+                @for($i=0; $i<3; $i++)
+                    <div class="single-order col-md-12">
+                        <!-- row 1 -->
+                        <div class="order-info col-md-12">
+                            <div class="col-md-2">12 March <br> 2:05 PM</div>
+                            <div class="col-md-7" style="border-left: 2px solid rgba(0,0,0,0.42); border-right: 2px solid rgba(0,0,0,0.42);">
+                                <p class="product-name"><a href="">Calculus  fjdnf jrn jkn</a></p>
+                                <p class="author">Haward Anton</p>
                             </div>
+                            <div class="pricing col-md-3">(200 x 1) + <span title="Shipping Cost">30</span>
+                                - <span title="Discount">0</span> = 230</div>
                         </div>
 
-                    </div>
-                </div>
-    </div>
-        <div class="col-md-4">
-            {{--Canceled--}}
+                        <!-- row 2 -->
+                        <div class="customer-info col-md-12">
+                            <div class="left col-md-6">
+                                <p>
+                                    <label>Name</label>
+                                    <span>Partho Protim Mondal</span>
+                                </p>
 
-            <div class="col-md-12" style="background-color: rgba(255,0,21,0.21)">
-                <h3 class="text-center">Canceled</h3>
-                <div class="col-md-12 canceled-order">
-                    <div class="col-md-12">
-                        <img src="/assets/images/books/android.png" class="col-md-6 col-xs-12" alt=""width="100%" height="200px">
-                        <div class="col-md-6">
-                            <p>Book Name</p>
-                            <p>Price</p>
-                            <p>Qty</p>
+                                <p>
+                                    <label>Email</label>
+                                    <span>Partho Protim Mondal</span>
+                                </p>
+
+                                <p>
+                                    <label>Mobile</label>
+                                    <span>Partho Protim Mondal</span>
+                                </p>
+                            </div>
+                            <div class="right col-md-6">
+                                <button class="save-address btn-default">Save Address</button>
+                                <p><textarea id="" class="form-control" rows="2">Jagannath Hall, Room No 410</textarea></p>
+                            </div>
                         </div>
+
+                        <!-- row 3 -->
+                        <div class="row3 col-md-12">
+                            <div class="col-md-8"><textarea id="" class="note form-control" rows="3" placeholder="Short Note"></textarea></div>
+                            <div class="col-md-4" style="padding-left: 10px">
+                                <p><button class="save-note btn btn-success form-control">Save Note</button></p>
+                                <select id="" class="form-control">
+                                    <option selected disabled>Order Status</option>
+                                    <option value="">Complete</option>
+                                    <option value="">Cancel</option>
+                                </select>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="col-md-4">
-                                <p>Name</p>
-                            </div>
-                            <div class="col-md-8">
-                                <p>Sourav Kumar Pramanik</p>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-4">
-                                <p>Address</p>
-                            </div>
-                            <div class="col-md-8">
-                                <p>Jagannath Hall,Room : 404</p>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-4">
-                                <p>Mobile</p>
-                            </div>
-                            <div class="col-md-8">
-                                <p>01750366927</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endfor
             </div>
-
-
-            {{--complete--}}
-
-            <div class="col-md-12" style="background-color: rgba(0,255,8,0.11)">
-                <h3 class="text-center">Completed</h3>
-                <div class="col-md-12 completed-order">
-                    <div class="col-md-12">
-                        <img src="/assets/images/books/android.png" class="col-md-6 col-xs-12" alt=""width="100%" height="200px">
-                        <div class="col-md-6">
-                            <p>Book Name</p>
-                            <p>Price</p>
-                            <p>Qty</p>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="col-md-4">
-                                <p>Name</p>
-                            </div>
-                            <div class="col-md-8">
-                                <p>Sourav Kumar Pramanik</p>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-4">
-                                <p>Address</p>
-                            </div>
-                            <div class="col-md-8">
-                                <p>Jagannath Hall,Room : 404</p>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-4">
-                                <p>Mobile</p>
-                            </div>
-                            <div class="col-md-8">
-                                <p>01750366927</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+        <div class="col-md-3">
+            <h3>Completed recently</h3>
+        </div>
     </div>
 </div>
+<script>
 
+    $(document).ready(function () {
+        $('.product-delete-btn').click(function (e) {
+            if( ! confirm("Sure Delete ?")){
+                e.preventDefault();
+            }
+        });
+    });
+</script>
 </body>
 </html>
