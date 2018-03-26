@@ -160,6 +160,43 @@ foreach ($products as $product){
     </div>
 </div>
 
-</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs/0.5.3/fingerprint.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#browser_id').val(new Fingerprint().get());
+
+        $('#request-custom-order-btn').click(function () {
+            $('#browser_id').val(new Fingerprint().get()); // same action to ensure that fingerprint is got
+            var book_name = $('#requested-book-name').val();
+            var writer_name = $('#requested-book-writer').val();
+            var mobile = $('#requester-mobile-num').val();
+            var email = $('#requester-email').val();
+            var address = $('#requester-address').val();
+            var browser_id = $('#browser_id').val();
+
+            if(book_name && writer_name && mobile && email && address){
+                $.ajax({
+                    url : "request_custom_order", type : "post", data : {
+                        _token : "{{ csrf_token() }}", book_name : book_name, writer_name : writer_name, mobile : mobile,
+                        email : email, address : address, browser_id : browser_id
+                    }, success : function (response) {
+                        //console.log(response);
+                        if( response === 'success' ){
+                            $('#book-request-container input, textarea').each(function () {
+                                $(this).val("");
+                                alert("OrdersControllerHelper received. Please Check email");
+                            });
+                        }
+                    }, error : function () { alert("Please try again after reloading page"); }
+                });
+                //console.log(book_name+"--"+writer_name+"--"+mobile+"--"+email+"--"+address+browser_id);
+            }else{
+                alert("All fields are mandatory");
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

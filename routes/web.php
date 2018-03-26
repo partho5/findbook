@@ -20,6 +20,8 @@ Route::get('/dash', 'AdminPanelController@index');
 
 Route::resource('/order', 'OrderController');
 
+Route::post('/request_custom_order', 'OrderController@requestCustomOrder');
+
 
 
 Route::resource('/product', 'ProductController');
