@@ -79,6 +79,8 @@ foreach ($products as $product){
                     <p>Something</p>
                     <p>Something</p>
                 </div>
+
+
                 <div class="left-box single-left-product-wrapper">
                     <div class="some">rttrrty rtrt <br> lrjj rf er</div>
                     <div class="single-left-product">

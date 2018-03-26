@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Library\VariableCollection;
 use App\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class HomeController extends Controller
@@ -30,7 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Products::all();
+        $products = Products::where('img_url', '!=', null)->get();
         $productImgPrefix = $this->variables->awsUrlPrefix();
 
         foreach ($products as $product){
@@ -38,11 +39,18 @@ class HomeController extends Controller
         }
 
         //return $products;
+        if(count($products) == 0){
+            return redirect('/product/create');
+        }
+
 
         return view('pages.index', [
             'products'      => $products,
         ]);
 
+
+
+        /*
         $url = "http://code--projects.com/findbook/";
         $storeInfo = $this->getStoreInfo($url);
         $products = $storeInfo['products'];
@@ -54,6 +62,7 @@ class HomeController extends Controller
             'products'         => $products,
             'rootCategories'   => $rootCategories
         ]);
+        */
     }
 
 

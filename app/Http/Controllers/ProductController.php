@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Library\VariableCollection;
 use App\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,6 +21,7 @@ class ProductController extends Controller
 
     function __construct()
     {
+        //$this->middleware('auth');
         $this->variables = new VariableCollection();
     }
 
@@ -43,7 +45,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('pages.product.create');
+
+        return view('pages.product.create', [
+            'isAdmin'       => $this->isAdmin(),
+        ]);
     }
 
     /**
@@ -55,16 +60,22 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $fileObj = $request->file('product_img');
-        $fileOriginalName = $fileObj->getClientOriginalName();
-        $uniqueName = $fileObj->hashName();
-        $filePath = ( $this->variables->awsFolderName() )."/$fileOriginalName/$uniqueName";
-        $request['img_url'] = $filePath;
+        if($fileObj){
+            $fileOriginalName = $fileObj->getClientOriginalName();
+            $uniqueName = $fileObj->hashName();
+            $filePath = ( $this->variables->awsFolderName() )."/$fileOriginalName/$uniqueName";
+            $request['img_url'] = $filePath;
 
-        $pathToUpload = ( $this->variables->awsFolderName() )."/".$fileOriginalName;
-        Storage::disk('s3')->put($pathToUpload, $fileObj, "public");
+            $pathToUpload = ( $this->variables->awsFolderName() )."/".$fileOriginalName;
+            Storage::disk('s3')->put($pathToUpload, $fileObj, "public");
+        }
 
         $product = Products::create($request->except(['product_img']));
-        Session::put('success_msg', "Product Added Successfully. You can edit from <a href='/product/".($product->id)."/edit'>here</a>");
+        if($this->isAdmin()){
+            Session::put('success_msg', "Product Added Successfully. You can edit from <a href='/product/".($product->id)."/edit'>here</a>");
+        }else{
+            Session::put('success_msg', "<p style='color: #1b6d85'>Thank you. Please add more if you can remember</p>");
+        }
         return redirect()->back();
     }
 
@@ -137,5 +148,10 @@ class ProductController extends Controller
         Products::findOrFail($id)->delete();
 
         return redirect()->back();
+    }
+
+
+    private function isAdmin(){
+        return (in_array(Auth::id(), []));
     }
 }

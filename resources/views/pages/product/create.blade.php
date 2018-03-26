@@ -25,7 +25,7 @@
 <body>
 <div class="col-md-12">
     <div class="col-md-8 col-md-offset-2">
-        <h2 class="text-center">Add Product</h2>
+        <h2 class="text-center">Book List</h2>
         @if( ! is_null($msg = Session::get('success_msg')) )
             <p class="success-msg">{!! $msg !!}</p>
             {{ Session::put('success_msg', null) }}
@@ -35,17 +35,18 @@
             <div class="form-group">
                 <label for="" class="col-md-5">Book Name</label>
                 <div class="input-group col-md-7">
-                    <input type="text" name="name" class="form-control" required >
+                    <input type="text" name="name" class="form-control"  required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="" class="col-md-5">Author</label>
                 <div class="input-group col-md-7">
-                    <input type="text" name="author" class="form-control" required >
+                    <input type="text" name="author" class="form-control"  placeholder="Add if you know">
                 </div>
             </div>
 
+            @if($isAdmin)
             <div class="form-group">
                 <label for="" class="col-md-5">Edition</label>
                 <div class="input-group col-md-7">
@@ -56,7 +57,7 @@
             <div class="form-group">
                 <label for="" class="col-md-5">Price</label>
                 <div class="input-group col-md-7">
-                    <input type="text" name="price" class="form-control" required >
+                    <input type="text" name="price" class="form-control"  >
                 </div>
             </div>
 
@@ -70,7 +71,7 @@
             <div class="form-group">
                 <label for="" class="col-md-5">Image</label>
                 <div class="input-group col-md-7">
-                    <input type="file" name="product_img" class="form-control" required >
+                    <input type="file" name="product_img" class="form-control"  >
                 </div>
             </div>
 
@@ -81,11 +82,12 @@
                     <input type="hidden" name="category_id" value="0">
                 </div>
             </div>
+            @endif
 
             <div class="form-group">
                 <div class="input-group col-md-12">
                     <div class="col-md-2 col-md-offset-5">
-                        <input type="submit" class="btn btn-success" value="Add Product">
+                        <input type="submit" class="btn btn-success" value="Save">
                     </div>
                 </div>
             </div>

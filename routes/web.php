@@ -35,3 +35,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::get('/invoice', 'OrderController@showInvoice');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

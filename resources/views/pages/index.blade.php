@@ -28,6 +28,7 @@ $agent = new Agent();
         <div id="product-cat-1" class="col-md-12" style="padding: 0px">
             <h2><span>Book Category : Science</span></h2>
 
+            @if(count($products) > 0)
             @foreach($products as $product)
                 <div class="box single-product-wrapper col-md-4">
                     <div class="some">rttrrty rtrt <br> lrjj rf er</div>
@@ -46,6 +47,7 @@ $agent = new Agent();
                     </div>
                 </div>
             @endforeach
+            @endif
         </div>
     </div>
 
