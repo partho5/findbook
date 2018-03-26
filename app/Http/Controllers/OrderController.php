@@ -6,6 +6,7 @@ use App\Library\Library;
 use App\Library\VariableCollection;
 use App\Orders;
 use App\Processor\Offers;
+use App\Processor\OrderControllerHelper;
 use App\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -18,7 +19,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected $Lib, $offers, $variables;
+    protected $Lib, $offers, $variables, $orderHelper;
 
     function __construct()
     {
@@ -82,8 +83,17 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+
         //return $request->all();
         $order = Orders::create($request->all());
+
+        $data['order'] = $order;
+        $product = Products::find($request['product_id']);
+        $order['product'] = $product;
+        $order['shipping_cost'] = $this->offers->getDeliveryCharge($order->quantity);
+        $order['discount'] = $this->offers->getDiscount($order->quantity);
+        $this->orderHelper = new OrderControllerHelper();
+        $this->orderHelper->sendMailOnCreate($data);
 
         return redirect('/order')->withCookie(cookie("browser_id", $request['browser_id'], 60*24*365*2));
     }

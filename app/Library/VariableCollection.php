@@ -44,4 +44,8 @@ class VariableCollection
             30  => 'Change order pending'
         ];
     }
+
+
+    public $sendMailFrom = 'findbook@gmail.com';
+    public $mailSubjectOnCreateOrder = "Order Received";
 }

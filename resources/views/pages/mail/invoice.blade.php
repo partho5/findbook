@@ -3,51 +3,44 @@
     <title>Invoice</title>
     <style>
         body {
-            font-family: "Open Sans", sans-serif;
+            font-family: Raleway;
             line-height: 1.25;
         }
-        .heading{
+        #header{
+            background-color: #F2F2F2;
             text-align: center;
-            font-size: 6vh;
-            color: #00afad;
+            line-height: 0.6;
+            padding-top: 1px;
+            padding-bottom: 10px;
         }
-       .product-table {
-            border-collapse: collapse;
-            border-spacing: 0;
-            width: 100%;
-            text-align: center;
-           background-color: #f8f8f8;
+        #header h3{
+            font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+            color: #1b6d85;
         }
-       .product-table th {
-           padding-top: 12px;
-           padding-bottom: 12px;
-           text-align: center;
-           background-color: #00afad;
-           color: white;
-       }
-        .product-table td {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: center;
+        #header .site-name{
+            color: #8c8c8c;
         }
-        .address-table {
-            width : 100%;
-            border-spacing: 0;
-            border: 1px solid #ddd;
-            text-align: left;
-            background-color: #f8f8f8;
+        .product-name{
+            color: #007b46;
         }
-        .address-table td {
-            padding-top: 12px;
-            padding-bottom: 12px;
+        #pricing{
+            background-color: #F2F2F2;
+            border: 1px solid rgba(182, 182, 182, 0.51);
+        }
+        #pricing h4{
+            background-color: rgba(0, 74, 91, 0.17);
+            color: #000;
+        }
+        #pricing tr .label{
             text-align: left;
         }
-       .total-price {
-           border-top: 1px solid #00afad ;
-           font-size: 5vh;
-           color: #f00;
-       }
-        .address-table{
+        .total-payable{
+            background-color: #1b6d85;
+            color: #fff;
+        }
+        #user-info{
+            margin-top: 20px;
+            border: 1px solid rgba(182, 182, 182, 0.51);
             background-color: #F2F2F2;
         }
 
@@ -55,55 +48,62 @@
 </head>
 
 <body>
-    <div>
-        <h3 class="heading">Overview</h3>
-        <p style="text-align: center;">Payment method: <span>Cash On Delivery</span></p>
-        <table class="product-table">
-            <tr>
-                <th>Book Name</th>
-                <th>Qty</th>
-                <th>Total Price</th>
-            </tr>
-            <tr>
-                <td>A</td>
-                <td>5</td>
-                <td>300</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>Delivery Charge</td>
-                <td>30</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td class="total-price">Total</td>
-                <td class="total-price">330</td>
-            </tr>
-        </table>
-
-        <table class="address-table">
-            <tr>
-                <td></td>
-                <td>Name</td>
-                <td>Sourav Kumar Pramanik</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>Email</td>
-                <td>souravpk.sp@gmail.com</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>Mobile</td>
-                <td>01750366927</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>Address</td>
-                <td>Jagannath Hall,404</td>
-            </tr>
-        </table>
-
+<div>
+    <div id="header">
+        <h3>Order Summary</h3>
+        <span class="site-name">FindBook.link</span>
     </div>
+    <p class="product-name">{{ $order['product']['name'] }}</p>
+    <p class="qty">Qty : {{ $order['quantity'] }} piece(s)</p>
+    <div id="pricing">
+        <h4>Price Calculation</h4>
+        <table style="text-align: right">
+            <tr>
+                <td class="label">Price</td>
+                <td>{{ $order['product']['price'] }} x {{ $order['quantity'] }} = {{ $order['product']['price'] * $order['quantity'] }} </td>
+            </tr>
+
+            <tr>
+                <td class="label">Delivery Charge</td>
+                <td>{{ $order['shipping_cost'] }}</td>
+            </tr>
+
+            <tr>
+                <td class="label">Discount</td>
+                <td>{{ $order['discount'] }}</td>
+            </tr>
+
+            <tr class="total-payable">
+                <td class="label">You will Pay</td>
+                <td>{{ $order['product']['price'] * $order['quantity'] + $order['shipping_cost'] - $order['discount'] }}</td>
+            </tr>
+        </table>
+    </div> <!-- #pricing -->
+
+    <div id="user-info">
+        <p><u>Will be shipped to </u>: </p>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td>{{ $order['customer_name'] }}</td>
+            </tr>
+
+            <tr>
+                <td>Email:</td>
+                <td>{{ $order['email'] }}</td>
+            </tr>
+
+            <tr>
+                <td>Mobile:</td>
+                <td>{{ $order['phone'] }}</td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td>{{ $order['full_address'] }}</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
 </body>
 </html>
