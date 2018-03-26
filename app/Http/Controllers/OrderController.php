@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CustomOrder;
 use App\Library\Library;
 use App\Library\VariableCollection;
 use App\Orders;
@@ -10,6 +11,7 @@ use App\Processor\OrderControllerHelper;
 use App\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Mockery\Exception;
 
 class OrderController extends Controller
 {
@@ -172,6 +174,11 @@ class OrderController extends Controller
     }
 
     public function requestCustomOrder(Request $request){
-        echo 'success';
+        unset($request['_token']);
+        try{
+            CustomOrder::create($request->all());
+
+            echo 'success';
+        }catch (Exception $e){}
     }
 }

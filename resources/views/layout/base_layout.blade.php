@@ -186,15 +186,15 @@ foreach ($products as $product){
             if(book_name && writer_name && mobile && email && address){
                 $.ajax({
                     url : "request_custom_order", type : "post", data : {
-                        _token : "{{ csrf_token() }}", book_name : book_name, writer_name : writer_name, mobile : mobile,
+                        _token : "{{ csrf_token() }}", book_name : book_name, author_name : writer_name, phone : mobile,
                         email : email, address : address, browser_id : browser_id
                     }, success : function (response) {
                         //console.log(response);
-                        if( response === 'success' ){
+                        if( response === 'success'){
                             $('#book-request-container input, textarea').each(function () {
                                 $(this).val("");
-                                alert("Order received. Please Check email");
                             });
+                            alert("Order received");
                         }
                     }, error : function () { alert("Please try again after reloading page"); }
                 });
