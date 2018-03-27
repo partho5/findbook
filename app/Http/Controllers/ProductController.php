@@ -152,6 +152,6 @@ class ProductController extends Controller
 
 
     private function isAdmin(){
-        return (in_array(Auth::id(), []));
+        return (in_array(Auth::id(), [1,2]));
     }
 }

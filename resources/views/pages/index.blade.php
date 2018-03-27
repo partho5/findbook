@@ -6,12 +6,12 @@ use Jenssegers\Agent\Agent;
 $agent = new Agent();
 ?>
     <div id="middle-bar" class="col-md-8 col-md-push-2 text-center" style="padding: 0px">
-        <div class="col-md-12" id="row1">
+        <div class="col-md-12 hidden" id="row1">
             @if($agent->isDesktop())
                 <img id="logo" src="/assets/images/logo.png" class="col-md-4" alt="">
             @endif
 
-            <div id="header-search" class="skip-content">
+            <div id="header-search" class=" skip-content">
                 <form id="search_mini_form" action="" method="get">
                     <div class="input-box">
                         <br>
@@ -26,12 +26,21 @@ $agent = new Agent();
         </div>
 
         <div id="product-cat-1" class="col-md-12" style="padding: 0px">
-            <h2><span>Book Category : Science</span></h2>
+
+            <form class="hidden search-wrapper col-md-12" style="margin-top: 5px">
+                <div class="col-md-2"></div>
+                <div class="form-group col-md-8">
+                    <input type="search" name="q" class="form-control">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit">Search</button>
+                </div>
+            </form>
 
             @if(count($products) > 0)
             @foreach($products as $product)
                 <div class="box single-product-wrapper col-md-4">
-                    <div class="some">rttrrty rtrt <br> lrjj rf er</div>
+                    <div class="some">No Description added</div>
                     <div class="single-product col-md-12">
                         <img src="{{ $product->product_img_url }}" alt="">
                     </div>

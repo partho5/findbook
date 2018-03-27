@@ -13,7 +13,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('layout.base_layout', function ($view){
+            $view->with([
+                'var1'      => "v11111"
+            ]);
+        });
     }
 
     /**

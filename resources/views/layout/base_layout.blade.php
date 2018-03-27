@@ -51,14 +51,15 @@ foreach ($products as $product){
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/">Register</a></li>
-                        <li><a href="/">Login</a></li>
+                        {{--<li><a href="/">Home</a></li>--}}
+                        {{--<li><a href="/">Register</a></li>--}}
+                        {{--<li><a href="/">Login</a></li>--}}
+
+
                         {{--@foreach($rootCategories as $category)--}}
                         {{--<li><a href="">{{ $category }}</a></li>--}}
                         {{--@endforeach--}}
                     </ul>
-
                 </div>
                 <!-- /.navbar-collapse -->
             </div>
@@ -72,64 +73,7 @@ foreach ($products as $product){
 
             <div id="left-bar" class="col-md-2 col-md-pull-8 col-sm-6 text-center" style="padding: 0px">
 
-                <div>
-                    <p>Something</p>
-                    <p>Something</p>
-                    <p>Something</p>
-                    <p>Something</p>
-                    <p>Something</p>
-                </div>
-
-
-                <div class="left-box single-left-product-wrapper">
-                    <div class="some">rttrrty rtrt <br> lrjj rf er</div>
-                    <div class="single-left-product">
-                        <img src="{{ $product->product_img_url }}" alt="" width="50%">
-                    </div>
-                    <div class="about-left-product">
-                        <div class="col-md-12 col-xs-12">
-                            <p class="left-price-label col-md-6 col-xs-6" data-balloon-pos="up">{{ $product->price }} Tk</p>
-                            <a href="/order/create?product_id={{ $product->id }}" class="left-purchase-btn col-md-6 col-xs-6" data-balloon="Delivery Charge 30 Tk only" data-balloon-pos="up">Purchase</a>
-                        </div>
-                        <figcaption>
-                            <span class="left-product-name">{{ $product->name }}</span><br>
-                            <span class="left-author">Author : {{ $product->author }}</span>
-                        </figcaption>
-                    </div>
-                </div>
-                <div class="left-box single-left-product-wrapper">
-                    <div class="some">rttrrty rtrt <br> lrjj rf er</div>
-                    <div class="single-left-product">
-                        <img src="{{ $product->product_img_url }}" alt="" width="50%">
-                    </div>
-                    <div class="about-left-product">
-                        <div class="col-md-12 col-xs-12">
-                            <p class="left-price-label col-md-6 col-xs-6" data-balloon-pos="up">{{ $product->price }} Tk</p>
-                            <a href="/order/create?product_id={{ $product->id }}" class="left-purchase-btn col-md-6 col-xs-6" data-balloon="Delivery Charge 30 Tk only" data-balloon-pos="up">Purchase</a>
-                        </div>
-                        <figcaption>
-                            <span class="left-product-name">{{ $product->name }}</span><br>
-                            <span class="left-author">Author : {{ $product->author }}</span>
-                        </figcaption>
-                    </div>
-                </div>
-
-                <div class="left-box single-left-product-wrapper">
-                    <div class="some">rttrrty rtrt <br> lrjj rf er</div>
-                    <div class="single-left-product">
-                        <img src="{{ $product->product_img_url }}" alt="" width="50%">
-                    </div>
-                    <div class="about-left-product">
-                        <div class="col-md-12 col-xs-12">
-                            <p class="left-price-label col-md-6 col-xs-6" data-balloon-pos="up">{{ $product->price }} Tk</p>
-                            <a href="/order/create?product_id={{ $product->id }}" class="left-purchase-btn col-md-6 col-xs-6" data-balloon="Delivery Charge 30 Tk only" data-balloon-pos="up">Purchase</a>
-                        </div>
-                        <figcaption>
-                            <span class="left-product-name">{{ $product->name }}</span><br>
-                            <span class="left-author">Author : {{ $product->author }}</span>
-                        </figcaption>
-                    </div>
-                </div>            </div>
+            </div>
 
             <div id="right-bar" class="col-md-2 col-sm-6">
                 <h4 class="text-center">Need a book that isn't here ?</h4>
