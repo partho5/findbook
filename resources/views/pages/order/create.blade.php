@@ -60,7 +60,7 @@
                     <div class="input-group col-md-12">
                         <label for="" class="col-md-3">My Name</label>
                         <div class="col-md-9 col-xs-12">
-                            <input name="customer_name" type="text" class="form-control" placeholder="Full Name" required value="Partho Protim">
+                            <input name="customer_name" type="text" class="form-control" placeholder="Full Name" required>
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                     <div class="input-group col-md-12">
                         <label for="" class="col-md-3">Email</label>
                         <div class="col-md-9 col-xs-12">
-                            <input name="email" type="text" class="form-control" placeholder="You will get order information in this email" required value="partho8181bd@gmail.com">
+                            <input name="email" type="text" class="form-control" placeholder="You will get order information in this email" required>
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     <div class="input-group col-md-12">
                         <label for="" class="col-md-3">Mobile</label>
                         <div class="col-md-9 col-xs-12">
-                            <input name="phone" type="text" class="form-control" placeholder="Needed to contact you" required value="01781603405">
+                            <input name="phone" type="text" class="form-control" placeholder="Needed to contact you" required>
                         </div>
                     </div>
                 </div>

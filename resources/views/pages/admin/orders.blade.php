@@ -15,17 +15,20 @@
     <div class="col-md-12">
         <div class="col-md-9">
             <div id="order-wrapper">
-                @for($i=0; $i<3; $i++)
+                @foreach($orders as $order)
                     <div class="single-order col-md-12">
                         <!-- row 1 -->
                         <div class="order-info col-md-12">
-                            <div class="col-md-2">12 March <br> 2:05 PM</div>
-                            <div class="col-md-7" style="border-left: 2px solid rgba(0,0,0,0.42); border-right: 2px solid rgba(0,0,0,0.42);">
-                                <p class="product-name"><a href="">Calculus  fjdnf jrn jkn</a></p>
-                                <p class="author">Haward Anton</p>
+                            <div class="date-time col-md-2">{{ \Carbon\Carbon::parse($order->created_at)->format('F j') }} <br>
+                                {{ \Carbon\Carbon::parse($order->created_at)->format('g:i A') }}
                             </div>
-                            <div class="pricing col-md-3">(200 x 1) + <span title="Shipping Cost">30</span>
-                                - <span title="Discount">0</span> = 230</div>
+                            <div class="col-md-7" style="border-left: 2px solid rgba(0,0,0,0.42); border-right: 2px solid rgba(0,0,0,0.42);">
+                                <p class="product-name"><a href="">{{ $order->product_name }}</a></p>
+                                <p class="author">{{ $order->author }}</p>
+                            </div>
+                            <div class="pricing col-md-3">({{ $order->price }} x {{ $order->quantity }})
+                                + <span title="Shipping Cost">{{ $order->delivery_charge }}</span>
+                                - <span title="Discount">{{ $order->discount }}</span> = {{ $order->total_payable }}</div>
                         </div>
 
                         <!-- row 2 -->
@@ -33,22 +36,22 @@
                             <div class="left col-md-6">
                                 <p>
                                     <label>Name</label>
-                                    <span>Partho Protim Mondal</span>
+                                    <span>{{ $order->customer_name }}</span>
                                 </p>
 
                                 <p>
                                     <label>Email</label>
-                                    <span>Partho Protim Mondal</span>
+                                    <span>{{ $order->email }}</span>
                                 </p>
 
                                 <p>
                                     <label>Mobile</label>
-                                    <span>Partho Protim Mondal</span>
+                                    <span>{{ $order->phone }}</span>
                                 </p>
                             </div>
                             <div class="right col-md-6">
                                 <button class="save-address btn-default">Save Address</button>
-                                <p><textarea id="" class="form-control" rows="2">Jagannath Hall, Room No 410</textarea></p>
+                                <p><textarea id="" class="form-control" rows="2">{{ $order->full_address }}</textarea></p>
                             </div>
                         </div>
 
@@ -56,17 +59,18 @@
                         <div class="row3 col-md-12">
                             <div class="col-md-8"><textarea id="" class="note form-control" rows="3" placeholder="Short Note"></textarea></div>
                             <div class="col-md-4" style="padding-left: 10px">
-                                <p><button class="save-note btn btn-success form-control">Save Note</button></p>
-                                <select id="" class="form-control">
+                                <p><button class="save-note btn form-control">Save Note</button></p>
+                                <select class="order-status form-control" order-id="{{ $order->id }}">
                                     <option selected disabled>Order Status</option>
-                                    <option value="">Complete</option>
-                                    <option value="">Cancel</option>
+                                    @foreach($orderStatus as $statusCode => $status)
+                                        <option value="{{ $statusCode }}" {{ $order->status_code == $statusCode ? "selected":"" }} >{{ $status }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
 
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
         <div class="col-md-3">
@@ -81,6 +85,18 @@
             if( ! confirm("Sure Delete ?")){
                 e.preventDefault();
             }
+        });
+
+        $('.order-status').on('change', function () {
+            var selectedStatus = $(this).val();
+            var orderId = $(this).attr('order-id');
+            $.ajax({
+                url : '/dash/order/save_order_status', type : 'post', data : {
+                    _token : "{{ csrf_token() }}", selectedStatus : selectedStatus, orderId : orderId
+                }, success : function (response) {
+                    console.log(response);
+                }, error : function () { alert("Error Occurred. Try again") }
+            });
         });
     });
 </script>

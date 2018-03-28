@@ -19,17 +19,21 @@
     border-radius: 5px;
     margin-top: 3px;
 }
+.single-order .order-info .date-time{
+    color: #00f;
+}
 .single-order .order-info .product-name{
     color: #00907a;
     font-size: 18px;
     font-weight: bold;
 }
 .single-order .order-info .pricing{
-    color: #000;
+    color: #b04100;
     font-size: 18px;
 }
 .single-order .customer-info{
     border: 1px solid rgba(165, 165, 165, 0.8);
+    color: rgba(64, 64, 64, 0.94);
     border-radius: 5px;
     margin-top: 3px;
 }
@@ -47,4 +51,15 @@
     border: 1px solid rgba(165, 165, 165, 0.8);
     border-radius: 5px;
     margin-top: 3px;
+}
+.save-note{
+    background-color: #f9f9f9;
+    color: #000;
+}
+.order-status{
+    background-color: rgba(0, 106, 168, 0.88);
+    color: #fff;
+}
+.order-status:hover{
+    background-color: #004a75;
 }

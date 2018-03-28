@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Library\VariableCollection;
+use App\Orders;
+use App\Processor\OrderControllerHelper;
 use Illuminate\Http\Request;
 
 class AdminPanelController extends Controller
 {
+
+    private $orderHelper, $variables;
 
     function __construct()
     {
@@ -26,13 +31,26 @@ class AdminPanelController extends Controller
     }
 
     public function index(Request $request){
+        $orders = Orders::where('status_code', '<', 20)->Where('status_code', '>', 0)->get();
+        // 0=cancel , 20=You received product in hand
+        $this->orderHelper = new OrderControllerHelper();
+        $orders = $this->orderHelper->completeOrderInfoForAdmin($orders);
 
-//        $bookData = $this->url_get_contents('http://choriyedao.com/api/books?key=yoyo');
-//
-//        return view('pages.two_site_data_combine', [
-//            'bookData'      => json_decode($bookData)
-//        ]);
+        $this->variables = new VariableCollection();
+        $orderStatus = $this->variables->orderStatus();
 
-        return view('pages.admin.orders');
+        //return $orders;
+
+        return view('pages.admin.orders', [
+            'orders'        => $orders,
+            'orderStatus'   => $orderStatus,
+        ]);
+    }
+
+    public function saveOrderStatus(Request $request){
+        $orderId = $request['orderId'];
+        $selectedStatus = $request['selectedStatus'];
+        Orders::where('id', $orderId)->update(['status_code' => $selectedStatus]);
+        echo 'success';
     }
 }

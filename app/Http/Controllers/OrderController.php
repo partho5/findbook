@@ -36,22 +36,8 @@ class OrderController extends Controller
             ->orderBy('updated_at', 'desc')->get();
         // status_code < 20 implies -----> customer didn't get the product in hand, i.e. a pending order
 
-        $numberOfProduct = 1;
-        foreach ($orders as $order){
-            $product = Products::findOrFail($order->product_id);
-
-            $order->product_img_url = $this->variables->awsUrlPrefix()."/".$this->variables->awsBucketName()."/".$product->img_url;
-            $order->product_name = $product->name;
-            $order->author = $product->author;
-            $order->price = $product->price;
-            if($numberOfProduct++ > $this->offers->minQtyForFreeDelivery){
-                //if more than $minQtyForFreeDelivery product(s)
-                $order->delivery_charge = 0;
-            }else{
-                $order->delivery_charge = $this->offers->getDeliveryCharge($order->quantity);
-            }
-            $order->discount = $this->offers->getDiscount($order->quantity);
-        }
+        $this->orderHelper = new OrderControllerHelper();
+        $orders = $this->orderHelper->completeOrderInfo($orders);
 
         //return $orders;
 

@@ -51,7 +51,7 @@ foreach ($products as $product){
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        {{--<li><a href="/">Home</a></li>--}}
+                        <li><a href="/order">My Orders</a></li>
                         {{--<li><a href="/">Register</a></li>--}}
                         {{--<li><a href="/">Login</a></li>--}}
 
