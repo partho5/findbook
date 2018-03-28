@@ -11,6 +11,30 @@
 </head>
 <body>
 <div class="col-md-12">
+
+    <nav class="navbar navbar-default navbar-fixed-top" id="menu-bar" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/" >Find Book</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Store</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
     <h3 class="text-center">Pending Orders</h3>
     <div class="col-md-12">
         <div class="col-md-9">
@@ -19,7 +43,8 @@
                     <div class="single-order col-md-12">
                         <!-- row 1 -->
                         <div class="order-info col-md-12">
-                            <div class="date-time col-md-2">{{ \Carbon\Carbon::parse($order->created_at)->format('F j') }} <br>
+                            <div class="date-time col-md-2">
+                                {{ \Carbon\Carbon::parse($order->created_at)->format('F j') }} <br>
                                 {{ \Carbon\Carbon::parse($order->created_at)->format('g:i A') }}
                             </div>
                             <div class="col-md-7" style="border-left: 2px solid rgba(0,0,0,0.42); border-right: 2px solid rgba(0,0,0,0.42);">
@@ -74,7 +99,18 @@
             </div>
         </div>
         <div class="col-md-3">
-            <h3>Completed recently</h3>
+            <h3>Custom Order</h3>
+            @foreach($customOrders as $order)
+                <hr>
+                <u>{{ \Carbon\Carbon::parse($order->created_at)->format('F j g:i A') }}</u>
+                <p>
+                    <b>{{ $order-> book_name}}</b>,
+                    <i>{{ $order->author_name }}</i>
+                </p>
+                <p>{{ $order->email }}</p>
+                <p>{{ $order->phone }}</p>
+                <p>{{ $order->address }}</p>
+            @endforeach
         </div>
     </div>
 </div>

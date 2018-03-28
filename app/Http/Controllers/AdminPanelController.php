@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CustomOrder;
 use App\Library\VariableCollection;
 use App\Orders;
 use App\Processor\OrderControllerHelper;
@@ -41,8 +42,13 @@ class AdminPanelController extends Controller
 
         //return $orders;
 
+        $customOrder = CustomOrder::where('status_code', '<', 20)->get();
+
+        //return $customOrder;
+
         return view('pages.admin.orders', [
             'orders'        => $orders,
+            'customOrders'  => $customOrder,
             'orderStatus'   => $orderStatus,
         ]);
     }
