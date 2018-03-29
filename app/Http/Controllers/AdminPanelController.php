@@ -43,7 +43,6 @@ class AdminPanelController extends Controller
         //return $orders;
 
         $customOrder = CustomOrder::where('status_code', '<', 20)->get();
-
         //return $customOrder;
 
         return view('pages.admin.orders', [
