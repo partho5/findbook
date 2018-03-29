@@ -56,7 +56,6 @@ class AdminPanelController extends Controller
         $orderId = $request['orderId'];
         $selectedStatus = $request['selectedStatus'];
         Orders::where('id', $orderId)->update(['status_code' => $selectedStatus]);
-
         echo 'success';
     }
 }
