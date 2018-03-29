@@ -27,7 +27,7 @@ $agent = new Agent();
 
         <div id="product-cat-1" class="col-md-12" style="padding: 0px">
 
-            <form class="hidden search-wrapper col-md-12" style="margin-top: 5px">
+            <form action="/search_query" class="search-wrapper col-md-12" style="margin-top: 5px">
                 <div class="col-md-2"></div>
                 <div class="form-group col-md-8">
                     <input type="search" name="q" class="form-control">
@@ -36,6 +36,26 @@ $agent = new Agent();
                     <button type="submit">Search</button>
                 </div>
             </form>
+
+            @if( ! is_null($searchResult = Session::get('searchResult')) )
+                <div class="box single-product-wrapper col-md-4">
+                    <div class="some">No Description added</div>
+                    <div class="single-product col-md-12">
+                        <img src="" alt="">
+                    </div>
+                    <div class="about-product">
+                        <div class="col-md-12 col-xs-12">
+                            <p class="price-label col-md-6 col-xs-6" data-balloon-pos="up"></p>
+                            <a href="/order/create?product_id=" class="purchase-btn col-md-6 col-xs-6" data-balloon="Delivery Charge 30 Tk only" data-balloon-pos="up">Purchase</a>
+                        </div>
+                        <figcaption>
+                            <p class="product-name"></p>
+                            <p>Author : </p>
+                        </figcaption>
+                    </div>
+                </div>
+            @endif
+
 
             @if(count($products) > 0)
             @foreach($products as $product)

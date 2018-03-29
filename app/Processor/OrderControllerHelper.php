@@ -30,7 +30,7 @@ class OrderControllerHelper
 
         Mail::send('pages.mail.invoice', $data, function ($mail) use ($data){
             $mail->from($this->variables->sendMailFrom, "FindBook");
-            $mail->to($data['order']['email'])->subject($this->variables->mailSubjectOnCreateOrder);
+            $mail->to($data['order']['email'])->subject($data['order']['product']['name']);
         });
     }
     

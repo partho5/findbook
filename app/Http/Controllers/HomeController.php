@@ -6,6 +6,8 @@ use App\Library\VariableCollection;
 use App\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 
 class HomeController extends Controller
@@ -84,5 +86,13 @@ class HomeController extends Controller
         return json_decode($result, true);
     }
 
+    public function searchQuery(){
+        $q = @$_GET['q'];
+
+        $result = DB::select("select name, author from products where name sounds like $q ");
+        return $result;
+        Session::put('searchResult', $q);
+        return redirect('/');
+    }
 
 }

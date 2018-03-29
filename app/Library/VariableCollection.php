@@ -46,6 +46,6 @@ class VariableCollection
     }
 
 
-    public $sendMailFrom = 'findbook@gmail.com';
+    public $sendMailFrom = 'findbook.link@gmail.com';
     public $mailSubjectOnCreateOrder = "Order Received";
 }
