@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Categories;
 use App\Library\VariableCollection;
 use App\Products;
 use Illuminate\Http\Request;
@@ -33,6 +34,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        return view('/home');
+    }
+
+    public function showHomePage(){
         $products = Products::where('img_url', '!=', null)->get();
         $productImgPrefix = $this->variables->awsUrlPrefix();
 
@@ -49,22 +54,6 @@ class HomeController extends Controller
         return view('pages.index', [
             'products'      => $products,
         ]);
-
-
-
-        /*
-        $url = "http://code--projects.com/findbook/";
-        $storeInfo = $this->getStoreInfo($url);
-        $products = $storeInfo['products'];
-        $rootCategories = $storeInfo['rootCategories'];
-
-        //dd($products);
-
-        return view('pages.index', [
-            'products'         => $products,
-            'rootCategories'   => $rootCategories
-        ]);
-        */
     }
 
 
@@ -87,11 +76,7 @@ class HomeController extends Controller
     }
 
     public function searchQuery(){
-        $q = @$_GET['q'];
-
-        $result = DB::select("select name, author from products where name sounds like $q ");
-        return $result;
-        Session::put('searchResult', $q);
+        Session::put('searchResult', Products::searchProducts( @$_GET['q'] ));
         return redirect('/');
     }
 

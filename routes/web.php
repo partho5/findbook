@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@showHomePage');
 
 
 
@@ -20,6 +20,11 @@ Route::get('/dash', 'AdminPanelController@index');
 Route::post('/dash/order/save_order_status', 'AdminPanelController@saveOrderStatus');
 
 Route::resource('/order', 'OrderController');
+
+
+
+Route::resource('/category', 'CategoryController');
+
 
 
 Route::post('/request_custom_order', 'OrderController@requestCustomOrder');
