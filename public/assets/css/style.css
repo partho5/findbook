@@ -74,6 +74,12 @@ nav {
     text-align: center;
     padding-top: 10px;
 }
+
+.src-result-title{
+    color: #ce4c00;
+    font-weight: bold;
+}
+
 #right-bar{
     background-color: rgba(0, 145, 218, 0.26);
     background-color: rgba(224, 224, 224, 0.57);

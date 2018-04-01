@@ -28,27 +28,35 @@ $agent = new Agent();
                 </div>
             </form>
 
-            @if( ! is_null($searchResult = Session::get('searchResult')) )
-                @foreach($searchResult as $product)
-                    <div class="box single-product-wrapper col-md-4" style="background-color: rgba(255,252,0,0.23)">
-                        <div class="some">No Description added</div>
-                        <div class="single-product col-md-12">
-                            <img src="{{ $product->product_img_url }}" alt="">
-                        </div>
-                        <div class="about-product">
-                            <div class="col-md-12 col-xs-12">
-                                <p class="price-label col-md-6 col-xs-6" data-balloon-pos="up">{{ $product->price }} Tk</p>
-                                <a href="/order/create?product_id={{ $product->id }}" class="purchase-btn col-md-6 col-xs-6" data-balloon="Delivery Charge 30 Tk only" data-balloon-pos="up">Purchase</a>
+            <div class="col-md-12">
+                @if( ! is_null($searchResult = Session::get('searchResult')) )
+                    @if(count($searchResult) == 0)
+                        <p class="src-result-title">We don't have this book right now.</p>
+                    @elseif(count($searchResult) == 1)
+                        <p class="src-result-title">1 book found</p>
+                    @else
+                        <p class="src-result-title">{{ count($searchResult) }} books found</p>
+                    @endif
+                    @foreach($searchResult as $product)
+                        <div class="box single-product-wrapper col-md-4" style="background-color: rgba(255,252,0,0.27)">
+                            <div class="some">No Description added</div>
+                            <div class="single-product col-md-12">
+                                <img src="{{ $product->product_img_url }}" alt="">
                             </div>
-                            <figcaption>
-                                <p class="product-name">{{ $product->name }}</p>
-                                <p>Author : {{ $product->author }}</p>
-                            </figcaption>
+                            <div class="about-product">
+                                <div class="col-md-12 col-xs-12">
+                                    <p class="price-label col-md-6 col-xs-6" data-balloon-pos="up">{{ $product->price }} Tk</p>
+                                    <a href="/order/create?product_id={{ $product->id }}" class="purchase-btn col-md-6 col-xs-6" data-balloon="Delivery Charge 30 Tk only" data-balloon-pos="up">Purchase</a>
+                                </div>
+                                <figcaption>
+                                    <p class="product-name">{{ $product->name }}</p>
+                                    <p>Author : {{ $product->author }}</p>
+                                </figcaption>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
-            @endif
-
+                    @endforeach
+                @endif
+            </div>
 
             @if(count($products) > 0)
             @foreach($products as $product)

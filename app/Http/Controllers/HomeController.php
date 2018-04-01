@@ -8,6 +8,7 @@ use App\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 
@@ -76,7 +77,15 @@ class HomeController extends Controller
     }
 
     public function searchQuery(){
-        Session::put('searchResult', Products::searchProducts( @$_GET['q'] ));
+        $q = @$_GET['q'];
+        $searchResult = Products::searchProducts( $q );
+
+        Mail::send('pages.mail.searched', ['searchResult' => $searchResult, 'q'=>$q], function ($mail) use ($searchResult, $q){
+            $mail->from("user@unknown.host", "FindBook Customer");
+            $mail->to("findbook.link@gmail.com")->subject($q);
+        });
+
+        Session::put('searchResult', $searchResult);
         return redirect('/');
     }
 
