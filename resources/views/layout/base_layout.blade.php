@@ -76,7 +76,7 @@ foreach ($products as $product){
             </div>
 
             <div id="right-bar" class="col-md-2 col-sm-6">
-                <h4 class="text-center">Need a book that isn't here ?</h4>
+                <h4 class="text-center">Need a book that isn't here?</h4>
                 <div id="book-request-container" class="col-md-12">
                     <div class="form-group">
                         <div class="input-group">

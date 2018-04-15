@@ -17,6 +17,7 @@ class Products extends Model
     public static function searchProducts($q){
         $variables = new VariableCollection();
         $terms = explode(" ", $q);
+        $terms = array_filter($terms); //removes "" from array
         $query_parts = array();
         foreach ($terms as $val) {
             $query_parts[] = "'%".($val)."%'";
