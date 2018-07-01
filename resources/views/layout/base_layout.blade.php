@@ -30,6 +30,7 @@ foreach ($products as $product){
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
 
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,600">
 
 </head>
@@ -56,9 +57,19 @@ foreach ($products as $product){
                         {{--<li><a href="/">Login</a></li>--}}
 
 
-                        {{--@foreach($rootCategories as $category)--}}
-                        {{--<li><a href="">{{ $category }}</a></li>--}}
-                        {{--@endforeach--}}
+                        @foreach($menu as $item)
+                            <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$item->menu_name}} <span class="caret"></span></a>
+                            @if ($item->submenu->count())
+                                    <ul class="dropdown-menu">
+                                        @foreach ($item->submenu as $subitem)
+                                            <li><a href="{{$subitem->id}}">{{$subitem->submenu_name}}</a></li>
+                                        @endforeach
+                                    </ul>
+                            @endif
+                            </li>
+                        @endforeach
+
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Categories;
 use App\Library\VariableCollection;
+use App\Menu;
 use App\Products;
+use App\SubMenu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -38,8 +40,16 @@ class HomeController extends Controller
         return view('/home');
     }
 
+
+    public function showMenus(){
+        $menus = Menu::all()->load('submenu');
+
+        dd($menus);
+    }
+
     public function showHomePage(){
-        $products = Products::where('img_url', '!=', null)->get();
+
+        $products = Products::where('price', '>', 0)->get();
         $productImgPrefix = $this->variables->awsUrlPrefix();
 
         foreach ($products as $product){
@@ -52,7 +62,7 @@ class HomeController extends Controller
         }
 
 
-        return view('pages.index', [
+        return view('pages/index', [
             'products'      => $products,
         ]);
     }

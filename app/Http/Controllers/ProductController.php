@@ -27,7 +27,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Products::all()->take(20);
+        $products = Products::all();
 
         foreach ($products as $product){
             $product->product_img_url = $this->variables->awsUrlPrefix()."/".$this->variables->awsBucketName()."/".$product->img_url;
