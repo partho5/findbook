@@ -18,11 +18,10 @@ $agent = new Agent();
 
 
         <div id="product-cat-1" class="col-md-12" style="padding: 0px">
-
             <form action="/search_query" class="search-wrapper col-md-12" style="margin-top: 5px">
                 <div class="col-md-2"></div>
                 <div class="form-group col-md-8">
-                    <input type="search" name="q" id="search-field" class="form-control">
+                    <input type="search" name="q" id="search-field" class="form-control" placeholder="Search any book / writer">
                 </div>
                 <div class="col-md-2">
                     <button type="submit" id="search-btn">Search</button>
@@ -84,6 +83,8 @@ $agent = new Agent();
 
 
     <link rel="stylesheet" href="/assets/css/balloon.css">
+
+    <script type="text/javascript" src="/assets/js/library.js"></script>
     <script>
         $(document).ready(function () {
             $('.box').hover(function () {
@@ -115,6 +116,17 @@ $agent = new Agent();
                     e.preventDefault();
                 }
             });
+
+
+            animatePlaceHolder(['Search any book/writer'], $('#search-field'));
+            setInterval(function () {
+                animatePlaceHolder(['Search any book/writer'], $('#search-field'));
+            }, 4000);
+
+
+
+
+
         });
     </script>
 

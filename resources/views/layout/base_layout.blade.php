@@ -103,12 +103,8 @@ foreach ($products as $product){
                             <input type="text" id="requester-mobile-num" name="mobile" class="form-control" value="01">
                         </div>
                         <div class="input-group">
-                            <span>Email</span>
-                            <input type="email" name="email" id="requester-email" class="form-control">
-                        </div>
-                        <div class="input-group">
                             <span><b>Full</b> Address</span>
-                            <textarea placeholder="Provide Complete Address" id="requester-address" rows="4"></textarea>
+                            <textarea placeholder="Provide Complete Address" id="requester-address" rows="4" class="form-control"></textarea>
                         </div>
                         <div class="input-group">
                             <br>
@@ -136,15 +132,14 @@ foreach ($products as $product){
             var book_name = $('#requested-book-name').val();
             var writer_name = $('#requested-book-writer').val();
             var mobile = $('#requester-mobile-num').val();
-            var email = $('#requester-email').val();
             var address = $('#requester-address').val();
             var browser_id = $('#browser_id').val();
 
-            if(book_name && writer_name && mobile && email && address){
+            if(book_name && writer_name && mobile && address){
                 $.ajax({
                     url : "request_custom_order", type : "post", data : {
                         _token : "{{ csrf_token() }}", book_name : book_name, author_name : writer_name, phone : mobile,
-                        email : email, address : address, browser_id : browser_id
+                        email : "unspecified", address : address, browser_id : browser_id
                     }, success : function (response) {
                         //console.log(response);
                         if( response === 'success'){
