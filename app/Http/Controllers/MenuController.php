@@ -27,7 +27,7 @@ class MenuController extends Controller
     public function create()
     {
         $menu = Menu::all();
-        return view('pages/menu/index', compact('menu'));
+        return view('pages/menu/create', compact('menu'));
     }
 
     /**
