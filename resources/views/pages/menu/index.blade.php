@@ -20,8 +20,8 @@
                 @if (Session::has('warning1'))
                     <p class="alert alert-warning">{!! Session::get('warning1') !!}</p>
                 @endif
-                @if (Session::has('success'))
-                    <p class="alert alert-success1">{!! Session::get('success1') !!}</p>
+                @if (Session::has('success1'))
+                    <p class="alert alert-success">{!! Session::get('success1') !!}</p>
                 @endif
                 <form method="post" action="/menu">
                     {{ csrf_field() }}

@@ -45,7 +45,7 @@ class MenuController extends Controller
             if(count($menus) > 0){
                 return Redirect::back()->with('warning1', "<b>$menuName</b> already exists");
             }
-            Menu::create($request->all());
+            //Menu::create($request->all());
             return Redirect::back()->with('success1', "<b>$menuName</b> has been added");
         }
         elseif($request->has('submenu_form')){
