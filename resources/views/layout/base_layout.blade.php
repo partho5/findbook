@@ -61,11 +61,11 @@ foreach ($products as $product){
                             <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$item->menu_name}} <span class="caret"></span></a>
                             @if ($item->submenu->count())
-                                    <ul class="dropdown-menu">
-                                        @foreach ($item->submenu as $subitem)
-                                            <li><a href="{{$subitem->id}}">{{$subitem->submenu_name}}</a></li>
-                                        @endforeach
-                                    </ul>
+                            <ul class="dropdown-menu">
+                                @foreach ($item->submenu as $subitem)
+                                <li><a href="{{$subitem->id}}">{{$subitem->submenu_name}}</a></li>
+                                @endforeach
+                            </ul>
                             @endif
                             </li>
                         @endforeach

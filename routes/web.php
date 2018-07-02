@@ -34,6 +34,9 @@ Route::post('/request_custom_order', 'OrderController@requestCustomOrder');
 Route::resource('/product', 'ProductController');
 
 
+Route::resource('/menu', 'MenuController');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -49,5 +52,3 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-Route::get('menus', 'HomeController@showMenus');

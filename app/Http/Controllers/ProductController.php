@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Library\VariableCollection;
 use App\Products;
+use App\SubMenu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -45,9 +46,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-
-        return view('pages.product.create', [
+        $submenus = SubMenu::select('id', 'submenu_name')->get();
+        return view('pages/product/create', [
             'isAdmin'       => $this->isAdmin(),
+            'submenus'      => $submenus,
         ]);
     }
 
@@ -87,7 +89,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return $id;
+        return Products::find($id);
     }
 
     /**
@@ -99,9 +101,11 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Products::findOrFail($id);
+        $submenus = SubMenu::select('id', 'submenu_name')->get();
 
         return view('pages.product.edit', [
             'product'       => $product,
+            'submenus'       => $submenus,
         ]);
     }
 

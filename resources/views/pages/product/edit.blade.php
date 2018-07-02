@@ -78,10 +78,12 @@
 
             <div class="form-group">
                 <label for="" class="col-md-5">Category</label>
-                <div class="input-group col-md-7">
-                    <input type="text" value="{{ $product->category_id }}" class="form-control" >
-                    <input type="hidden" name="category_id" value="0">
-                </div>
+                <select name="category_id" required class="input-group col-md-7">
+                    <option selected disabled>Select One</option>
+                    @foreach($submenus as $item)
+                        <option value="{{ $item->id }}" class="form-control" {{ $item->id == $product->category_id ? 'selected':'' }}>{{ $item->submenu_name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-group">
