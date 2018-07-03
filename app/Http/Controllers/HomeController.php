@@ -61,10 +61,25 @@ class HomeController extends Controller
             return redirect('/product/create');
         }
 
+        $submenuId = @$_GET['subcat'];
+        $matchedProducts = null; $submenuName = null;
+        if($submenuId){
+            $submenuName = SubMenu::find($submenuId)->submenu_name;
+            $matchedProducts = Products::where('category_id', $submenuId)->get();
+        }
 
         return view('pages/index', [
-            'products'      => $products,
+            'products'              => $products,
+            'matchedProducts'       => $matchedProducts,
+            'submenuName'           => $submenuName,
         ]);
+    }
+
+
+    public function showCategoryBooks($id){
+        $submenu = SubMenu::find($id);
+        return $submenu;
+        return view('pages/show-category-books');
     }
 
 

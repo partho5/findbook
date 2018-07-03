@@ -38,7 +38,7 @@ $agent = new Agent();
                         <p class="src-result-title">{{ count($searchResult) }} books found</p>
                     @endif
                     @foreach($searchResult as $product)
-                        <div class="box single-product-wrapper col-md-4" style="background-color: rgba(255,252,0,0.27)">
+                        <div class="box single-product-wrapper col-md-4" style="background-color: rgba(0, 75, 107, 0.08);">
                             <div class="some">No Description added</div>
                             <div class="single-product col-md-12">
                                 <img src="{{ $product->product_img_url }}" alt="">
@@ -58,10 +58,40 @@ $agent = new Agent();
                 @endif
             </div>
 
+
+                @if(isset($_GET['subcat']))
+                <div id="category-mathched-products" class="col-md-12">
+                    @if(count($matchedProducts) > 0)
+                        <h2>{{ $submenuName }}</h2>
+                        @foreach($matchedProducts as $product)
+                            <div class="box single-product-wrapper col-md-4">
+                                <div class="some"></div>
+                                <div class="single-product col-md-12">
+                                    <img src="{{ $product->product_img_url }}" alt="">
+                                </div>
+                                <div class="about-product">
+                                    <div class="col-md-12 col-xs-12">
+                                        <p class="price-label col-md-6 col-xs-6" data-balloon-pos="up">{{ $product->price }} Tk</p>
+                                        <a href="/order/create?product_id={{ $product->id }}" class="purchase-btn col-md-6 col-xs-6" data-balloon="Delivery Charge 30 Tk only" data-balloon-pos="up">Purchase</a>
+                                    </div>
+                                    <figcaption>
+                                        <p class="product-name">{{ $product->name }}</p>
+                                        <p>Author : {{ $product->author }}</p>
+                                    </figcaption>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        <p class="alert alert-success"><b>{{ $submenuName }}</b> books will be added soon</p>
+                    @endif
+                </div>
+                @endif
+
+
             @if(count($products) > 0)
             @foreach($products as $product)
                 <div class="box single-product-wrapper col-md-4">
-                    <div class="some">No Description added</div>
+                    <div class="some"><span style="font-size: 2em">25%</span> OFF</div>
                     <div class="single-product col-md-12">
                         <img src="{{ $product->product_img_url }}" alt="">
                     </div>

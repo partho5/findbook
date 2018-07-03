@@ -11,6 +11,7 @@
 |
 */
 
+//Route::get('/{id?}/{sub_category_name?}', 'HomeController@showHomePage')->where('id', '[0-9]+');
 Route::get('/', 'HomeController@showHomePage');
 
 

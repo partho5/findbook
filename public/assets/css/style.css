@@ -165,6 +165,16 @@ nav {
 #middle-bar .box .about-product:hover{
 
 }
+
+#category-mathched-products{
+    background-color: rgba(0, 75, 107, 0.08);
+}
+#category-mathched-products h2{
+    background-color: rgba(0, 75, 107, 0.66);
+    color: #eeeeee;
+    margin: 0px 15px 10px 15px;
+}
+
 .price-label {
     margin-top: 20px;
     color: #f00;
@@ -203,13 +213,15 @@ nav {
     position: relative;
 }
 .some{
-    display: none;
+    //display: none;
     position: absolute;
-    top: 20%;
+    top: 50%;
+    padding: 1.2em;
     z-index: 1;
     //background-color: #ff4500;
     background-color: rgba(0, 161, 191, 0.8);
-    color: #000;
+    background-color: #eeeeee;
+    color: #ff4500;
     font-size: 15px;
     //padding: 10px 20px;
     width: 0px;

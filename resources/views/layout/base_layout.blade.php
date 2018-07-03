@@ -63,7 +63,7 @@ foreach ($products as $product){
                             @if ($item->submenu->count())
                             <ul class="dropdown-menu">
                                 @foreach ($item->submenu as $subitem)
-                                <li><a href="{{$subitem->id}}">{{$subitem->submenu_name}}</a></li>
+                                <li><a href="?subcat={{$subitem->id}}">{{$subitem->submenu_name}}</a></li>
                                 @endforeach
                             </ul>
                             @endif
